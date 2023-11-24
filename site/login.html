@@ -17,26 +17,27 @@
         </nav>
     </header>
     <main>
-        <div class="warpper">
-            <div id="container" class="form-container">
-                <h2>Login</h2>
-                <form action="#">
-                    <div class="input-box">
-                        <span class="icon"></span>
-                        <input type="email" required>
-                        <label>Email</label>
+        <div class="container">
+            <div class="box form-box">
+                <div class="header">Login</div>
+                <form action="" method="post">
+                    <div class="field input">
+                        <label for="username">Username</label>
+                        <input type="text" name="username" id="">
                     </div>
-                    <div class="input-box">
-                        <span class="icon"></span>
-                        <input type="password" required>
-                        <label>Password</label>
+                    <div class="field input">
+                        <label for="password">Password</label>
+                        <input type="password" name="password" id="">
                     </div>
-                    <input type="submit" value="Login">
+                    <div class="field">
+                        <input type="submit" name="Login" id="">
+                    </div>
                 </form>
+                <div class="links">
+                    Não tens conta? <a href="registro.html">Clica aqui</a>
+                </div>
             </div>
-            <nav>
-                <a href="#">Não tens conta? Inicia aqui</a>
-            </nav>
+            
         </div>
     </main>
 </body>

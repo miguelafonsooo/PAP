@@ -14,6 +14,8 @@
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+  font-family: var(--fonte-padrao);
 }
 
 body {
@@ -171,12 +173,21 @@ footer {
 }
 
 /* Parte do login */
-#container {
-  padding-top: 300px;
-  text-align: center;
-  display: center;
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 90vh;
 }
 
+.box {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 25px 25px;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.226) 1px 6px 12px 8px;
+}
 
 @media (max-width: 700px) {
   header {
