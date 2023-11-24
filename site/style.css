@@ -171,9 +171,10 @@ footer {
 }
 
 /* Parte do login */
-#container h2 {
+#container {
   padding-top: 300px;
   text-align: center;
+  display: center;
 }
 
 
