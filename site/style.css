@@ -2,186 +2,182 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Playpen+Sans:wght@100;200;300;400;500;600;700;800&display=swap');
 
-
 :root {
-    --cor-1: #5005F2;
-    --cor-2: #5C73F2;
-    --cor-3: #6D99F2;
-    --cor-4: #80C7F2;
-    --cor-5: #99E2F2;
-    --fonte-padrao: 'Playpen Sans', cursive;
-
+  --cor-1: #5005F2;
+  --cor-2: #5C73F2;
+  --cor-3: #6D99F2;
+  --cor-4: #80C7F2;
+  --cor-5: #99E2F2;
+  --fonte-padrao: 'Playpen Sans', cursive;
 }
 
 * {
-    margin: 0px;
-    padding: 0px;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-image: url(images/back.png);
+  background-position: left center;
+  background-size: cover;
+  background-attachment: fixed;
+  font-family: var(--fonte-padrao);
+  margin: auto;
 }
 
 header {
-    width: 100%;
-    font-family: var(--fonte-padrao);
-    position: fixed;
-
+  width: 100%;
+  font-family: var(--fonte-padrao);
+  position: fixed;
 }
 
 h1 a {
-    text-decoration: none;
-    color: black;
+  text-decoration: none;
+  color: black;
 }
 
 header h1 {
-    text-align: left;
-    color: black;
-    font-size: 2.5em;
-    padding-left: 40px;
-    padding-bottom: 20px;
-    transition: 0.3s;
-
+  text-align: left;
+  color: black;
+  font-size: 2.5em;
+  padding-left: 40px;
+  padding-bottom: 20px;
+  transition: 0.3s;
 }
 
 header h1:hover {
-    font-size: 3em;
+  font-size: 3em;
 }
 
-
 nav a {
-    
-    padding: 30px;
-    left: 30px;
-    text-decoration: none;
-    color: black;
-    font-size: 1.3em;
-    font-weight: bolder;
-    transition-duration: 0.3s;
+  padding: 30px;
+  left: 30px;
+  text-decoration: none;
+  color: black;
+  font-size: 1.3em;
+  font-weight: bolder;
+  transition-duration: 0.3s;
 }
 
 nav a:hover {
-    font-size: 1.6em;
+  font-size: 1.6em;
 }
 
 main {
-    max-width: 1500px;
-    padding-left: 200px;
+  max-width: 1500px;
+  padding-left: 200px;
 }
 
 main h1 {
-    padding-top: 120px;
-    padding: 90px;
-    text-align: center;
-    color: #F6F6F6;
-    font-size: 100px;
+  padding-top: 120px;
+  text-align: center;
+  color: #F6F6F6;
+  font-size: 100px;
 }
 
-
-main h2 {
-    color: #F6F6F6;
-    text-align: center;
-    margin: 0px 250px;
-    font-size: 50px;
-    padding: 0px 100px;
+.h2index h2 {
+  color: #F6F6F6;
+  text-align: center;
+  margin: 0px 250px;
+  font-size: 50px;
+  padding: 0px 100px;
 }
 
 .conteudo {
-    margin-top: 100px;
-    display: flex;
-    align-items: center; 
-  }
-  
-  #margin {
-    padding-left: 300px;
-  }
-
-  .conteudo p {
-
-    text-align: left;
-    color: #F6F6F6;
-    text-indent: 30px;
-    font-weight: bold;
-    font-size: 50px;
-
-  }
-  
-  .conteudo img {
-    margin-right: auto;
-    width: 30%;
-    margin-left: 20px;
-  }
-  
-  #finalbox img {
-    padding-left: 100px;
-  }
-
-  #finalbox p {
-    display: block;
-    text-align: center;
-    padding-right: 100px;
-  }
-
-  #finalbox a {
-    line-height: 120px;
-    color: #99E2F2;
-    text-decoration: none;
-    transition-duration: 0.3s;
-  }
-
-  #finalbox a:hover {
-    border-radius: 20px;
-    background-color: #80C7F2;
-    color: white;
-    padding: 10px;
-  }
-
-  #boxsobre {
-    color: #F6F6F6;
-  }
-
-
-   #boxsobre h2 {
-    padding-top: 30px;
-    padding: 0;
-    font-weight: bold;
-    
-   }
-
-   #boxsobre p {
-    text-align: center;
-    margin: auto;
-    font-size: 1.2em;
-    margin: 20px 0px;
-    padding: 0px 250px;
-   }
-
-   #slogan p {
-    padding: 30px;
-    font-size: 3em;
-    font-style: oblique;
-    text-decoration: underline;
-   }
-
-   #boxsobre a {
-    color: #99E2F2;
-    text-decoration: underline;
-    font-weight: bold;
-   }
-
-body {
-    background-image: url(images/back.png);
-    background-position: left center;
-    background-size: cover;
-    background-attachment: fixed;
-    font-family: var(--fonte-padrao);
-    margin: auto;
+  margin-top: 100px;
+  display: flex;
+  align-items: center;
 }
+
+#margin {
+  padding-left: 300px;
+}
+
+.conteudo p {
+  text-align: left;
+  color: #F6F6F6;
+  text-indent: 30px;
+  font-weight: bold;
+  font-size: 50px;
+}
+
+.conteudo img {
+  margin-right: auto;
+  width: 30%;
+  margin-left: 20px;
+}
+
+#finalbox img {
+  padding-left: 100px;
+}
+
+#finalbox p {
+  display: block;
+  text-align: center;
+  padding-right: 100px;
+}
+
+#finalbox a {
+  line-height: 120px;
+  color: #99E2F2;
+  text-decoration: none;
+  transition-duration: 0.3s;
+}
+
+#finalbox a:hover {
+  border-radius: 20px;
+  background-color: #80C7F2;
+  color: white;
+  padding: 10px;
+}
+
+#boxsobre {
+  color: #F6F6F6;
+}
+
+#boxsobre h2 {
+  padding-top: 30px;
+  padding: 0;
+  font-weight: bold;
+}
+
+#boxsobre p {
+  text-align: center;
+  margin: auto;
+  font-size: 1.2em;
+  margin: 20px 0px;
+  padding: 0px 250px;
+}
+
+#slogan p {
+  padding: 30px;
+  font-size: 3em;
+  font-style: oblique;
+  text-decoration: underline;
+}
+
+#boxsobre a {
+  color: #99E2F2;
+  text-decoration: underline;
+  font-weight: bold;
+}
+
 footer {
-    margin-top: 100px;
-    color: #F6F6F6;
-    font-weight: bold;
-    font-size: 20px;
-    text-align: center;
+  margin-top: 100px;
+  color: #F6F6F6;
+  font-weight: bold;
+  font-size: 20px;
+  text-align: center;
 }
 
-@media (max-width: 700px){
+/* Parte do login */
+#container h2 {
+  padding-top: 300px;
+  text-align: center;
+}
+
+
+@media (max-width: 700px) {
   header {
     font-size: 0.7em;
     text-align: center;
@@ -196,7 +192,7 @@ footer {
     padding: 10px 0px;
     font-size: 30px;
   }
-  
+
   nav a {
     font-size: 20px;
     padding: 7px;
@@ -206,29 +202,25 @@ footer {
     padding: 0px;
   }
 
-
   .conteudo p {
     font-size: 1.3em;
     padding: 0px 30px;
   }
 
   main h1 {
-    
-    padding:  200px 0px 0px 0px;
+    padding: 200px 0px 0px 0px;
     font-size: 2em;
   }
 
-  main h2 {
+  .h2index h2 {
     margin: 0px;
     padding: 0px;
     font-size: 1.5em;
+    text-align: center;
   }
-
-
 
   #finalbox img {
     padding-left: 0px;
-
   }
 
   #finalbox a {
@@ -251,10 +243,9 @@ footer {
     font-size: 1.2em;
     margin: 20px;
     padding: 0px;
-   }
-
+  }
 
   body {
     background-position: right bottom;
   }
-} 
+}
