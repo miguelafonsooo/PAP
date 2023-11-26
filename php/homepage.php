@@ -10,13 +10,14 @@
     <header>
         <h1><a href="index.html">Máquina de Vendas</a></h1>
         <nav>
-            <a href="login.php">Login</a>
+            <a href="login.html">Login</a>
             <a href="#">Criar Conta</a>
             <a href="sobrenos.html">Sobre Nós</a>
         </nav>
     </header>
     <main>
         <h1>bem Vindo</h1>
+        <a href="logout.php">Sair</a>
     </main>
 </body>
 </html>
