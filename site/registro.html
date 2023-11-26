@@ -3,44 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registar aqui</title>
+    <title>Registro</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
         <h1><a href="index.html">Máquina de Vendas</a></h1>
         <nav>
-            <a href="login.html">Login</a>
+            <a href="#">Login</a>
             <a href="#">Criar Conta</a>
             <a href="sobrenos.html">Sobre Nós</a>
+            <a href="#"></a>
         </nav>
     </header>
     <main>
-        <div id="container" class="form-container">
-            <h2>Registro</h2>
-            <form action="#">
-                <div class="input-box">
-                    <span class="icon"></span>
-                    <input type="username" required>
-                    <label>Username</label>
+        <div class="container">
+            <div class="box form-box">
+                <div class="header">Registro</div>
+                <form action="" method="post">
+                    <div class="field input">
+                        <label for="username">Username</label>
+                        <input type="text" name="username" id="username" autocomplete="off">
+                    </div>
+                    <div class="field input">
+                        <label for="email">Email</label>
+                        <input type="text" name="email" id="email" autocomplete="off">
+                    </div>
+                    <div class="field input">
+                        <label for="age">Idade</label>
+                        <input type="number" name="age" id="age" autocomplete="off">
+                    </div>
+                    <div class="field input">
+                        <label for="password">Password</label>
+                        <input type="password" name="password" id="password" autocomplete="off">
+                    </div>
+                    <div class="field">
+                        
+                        <input type="submit" class="
+                        btn" name="submit" value="Login">
+                    </div>
+                </form>
+                <div class="links">
+                    Já és membro? <a href="login.html">Clica aqui</a>
                 </div>
-                <div class="input-box">
-                    <span class="icon"></span>
-                    <input type="email" required>
-                    <label>Email</label>
-                </div>
-                <div class="input-box">
-                    <span class="icon"></span>
-                    <input type="age" required>
-                    <label>Age</label>
-                </div>
-                <div class="input-box">
-                    <span class="icon"></span>
-                    <input type="password" required>
-                    <label>Password</label>
-                </div>
-                <input type="submit" value="Register">
-            </form>
+            </div>
+            
         </div>
     </main>
 </body>
