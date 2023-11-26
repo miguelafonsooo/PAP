@@ -16,7 +16,11 @@
             <a href="#"></a>
         </nav>
     </header>
+    <main>
+        <div class="container">
+            <div class="box form-box">
 
+            
     <?php
 
 include("php/config.php");
@@ -33,13 +37,12 @@ $verify_query = mysqli_query($con,"SELECT Email FROM users WHERE Email='$email'"
 if(mysqli_num_rows($verify_query) !=0) {
     echo "<div class='message'>
                 <p>Este email está a ser usado, Tenta outro por favor</p>
-            </div> <br>;
-    echo <a href='javascript:self.history.back()'><button class='btn'>Go Back</buttom>";
+            </div> <br>";
+    echo "<a href='javascript:self.history.back()'><button class='btn'>Go Back</buttom>";
 
 }
 else {
-
-    mysqli_query($con, "INSERT INTO users(Uername,Email,Age,Password) VALUES('$username''$email''$age''$password',)") or die ("Erro");
+    mysqli_query($con, "INSERT INTO users(Uername,Email,Age,Password) VALUES('$username','$email','$age','$password')") or die ("Error Ocurred");
     
     echo "<div class='message'>
                 <p>registro Completo!</p>
@@ -51,9 +54,7 @@ else {
 
 ?>
 
-    <main>
-        <div class="container">
-            <div class="box form-box">
+
                 <div class="header">Registro</div>
                 <form action="" method="post">
                     <div class="field input">
@@ -75,7 +76,7 @@ else {
                     <div class="field">
                         
                         <input type="submit" class="
-                        btn" name="submit" value="Login">
+                        btn" name="submit" value="Registro">
                     </div>
                 </form>
                 <div class="links">
