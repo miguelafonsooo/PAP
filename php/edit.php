@@ -15,6 +15,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
 </head>
 <body>
     <header>
@@ -31,9 +32,11 @@
                     $username = $_POST['username'];
                     $email = $_POST['email'];
                     $age = $_POST['age'];
+                    $password = $_POST['password'];
                     $id = $_SESSION['id'];
+                    
 
-                    $edit_query = mysqli_query($con, "UPDATE users SET Username='$username', Email='$email', Age='$age' WHERE Id=$id") or die("Error Ocurred");
+                    $edit_query = mysqli_query($con, "UPDATE users SET Username='$username', Email='$email', Age='$age', Password='$password' WHERE Id=$id") or die("Error Ocurred");
 
                     if($edit_query){
                         echo "<div class='message'>
@@ -50,6 +53,7 @@
                     $res_Uname = $result['Username'];
                     $res_Email = $result['Email'];
                     $res_Age = $result['Age'];
+                    $res_Password = $result['Password'];
                 }
                 
                 ?>
@@ -67,6 +71,10 @@
                     <div class="field input">
                         <label for="age">Idade</label>
                         <input type="number" name="age" id="age" value="<?php echo $res_Age; ?>" autocomplete="off">
+                    </div>
+                    <div class="field input">
+                        <label for="age">Password</label>
+                        <input type="password" name="password" id="password" autocomplete="off">
                     </div>
                     <div class="field">
                         <input type="submit" class="

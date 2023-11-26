@@ -1,5 +1,9 @@
 <?php
     session_start();
+    include("php/config.php");
+    if(isset($_SESSION['valid'])){
+        header("Location: homepage.php");
+    }
 ?>
 <!DOCTYPE html>
 <html lang="pt-pt">
@@ -8,6 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Entrar</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
 </head>
 <body>
     <header>

@@ -3,8 +3,8 @@
 
     include("php/config.php");
     if(!isset($_SESSION['valid'])){
-        header("Location: login.php");
-
+        header("Location: index.html");
+    
 
     }
 ?>
@@ -16,18 +16,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HomePage</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
 </head>
 <body>
     <header>
         <h1><a href="index.html">Máquina de Vendas</a></h1>
         <nav>
             <a href="sobrenos.html">Sobre Nós</a>
+            <a href="php/logout.php">Sair da Conta</a>
         </nav>
     </header>
     <main>
-        <h1>bem Vindo</h1>
-
-        <?php
+    <?php
 
         $id = $_SESSION['id'];
         $query = mysqli_query($con,"SELECT*FROM users WHERE id=$id");
@@ -38,17 +38,21 @@
             $res_Age = $result['Age'];
             $res_id = $result['Id'];
         }
-
-        echo "<a href=edit.php?Id=$res_id'>Mudar Perfil</a>";
-        ?>
-
+        
+        
+    ?>
+<div class="homepage">
+    
+        <h1>Bem Vindo <?php echo $res_Uname?></h1>
         <p>Olá <b><?php echo $res_Uname
         ?></b> tudo bem?</p>
         <p>Tens <b><?php echo $res_Age?></b> anos.</p>
         <p>O teu email é <b><?php echo $res_Email ?></b>.</p>
-        
 
-        <a href="php/logout.php"> <buttom class="btn">Sair<button> </a>
+        <h2>Queres editar o teu perfil? Clica aqui em baixo!</h2>
+
+        <?php echo "<a href=edit.php?Id='$res_id' class='links'>Editar Perfil</a>"; ?>     
     </main>
+</div>
 </body>
 </html>
