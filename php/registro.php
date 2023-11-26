@@ -66,7 +66,7 @@ else {
                 <div class="header">Registro</div>
                 <form action="" method="post">
                     <div class="field input">
-                        <label for="username">Username</label>
+                        <label for="username">Nome</label>
                         <input type="text" name="username" id="username" autocomplete="off">
                     </div>
                     <div class="field input">
@@ -78,7 +78,7 @@ else {
                         <input type="number" name="age" id="age" autocomplete="off">
                     </div>
                     <div class="field input">
-                        <label for="password">Password</label>
+                        <label for="password">Palavra-Passe</label>
                         <input type="password" name="password" id="password" autocomplete="off">
                     </div>
                     <div class="field">

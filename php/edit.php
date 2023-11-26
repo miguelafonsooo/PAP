@@ -61,7 +61,7 @@
                 <div class="header">Editar Perfil</div>
                 <form action="" method="post">
                     <div class="field input">
-                        <label for="username">Username</label>
+                        <label for="username">Nome</label>
                         <input type="text" name="username" id="username" value="<?php echo $res_Uname; ?>" autocomplete="off">
                     </div>
                     <div class="field input">
@@ -73,7 +73,7 @@
                         <input type="number" name="age" id="age" value="<?php echo $res_Age; ?>" autocomplete="off">
                     </div>
                     <div class="field input">
-                        <label for="age">Password</label>
+                        <label for="age">Palavra-Passe</label>
                         <input type="password" name="password" id="password" autocomplete="off">
                     </div>
                     <div class="field">

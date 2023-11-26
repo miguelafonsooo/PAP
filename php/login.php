@@ -61,7 +61,7 @@
                         <input type="text" name="email" id="email" autocomplete="off">
                     </div>
                     <div class="field input">
-                        <label for="password">Password</label>
+                        <label for="password">Palavra-Passe</label>
                         <input type="password" name="password" id="password" autocomplete="off">
                     </div>
                     <div class="field">
