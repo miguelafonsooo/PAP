@@ -38,16 +38,16 @@ if(mysqli_num_rows($verify_query) !=0) {
     echo "<div class='message'>
                 <p>Este email está a ser usado, Tenta outro por favor</p>
             </div> <br>";
-    echo "<a href='javascript:self.history.back()'><button class='btn'>Go Back</buttom>";
+    echo "<a href='javascript:self.history.back()'><button class='btn'>Voltar Atrás</buttom>";
 
 }
 else {
-    mysqli_query($con, "INSERT INTO users(Uername,Email,Age,Password) VALUES('$username','$email','$age','$password')") or die ("Error Ocurred");
+    mysqli_query($con, "INSERT INTO users(Username,Email,Age,Password) VALUES('$username','$email','$age','$password')") or die ("Error Ocurred");
     
     echo "<div class='message'>
-                <p>registro Completo!</p>
-            </div> <br>;
-    echo <a href='index.php'><button class='btn'>Login Now</buttom>";
+                <p>Registro Completo!</p>
+            </div> <br>";
+    echo "<a href='index.php'><button class='btn'>Logar Agora</buttom>";
 }
 
 }else{

@@ -1,3 +1,6 @@
+<?php
+    session_start();
+?>
 <!DOCTYPE html>
 <html lang="pt-pt">
 <head>
@@ -19,6 +22,34 @@
     <main>
         <div class="container">
             <div class="box form-box">
+                <?php
+                
+                include("php/config.php");
+                if(isset($_POST['submit'])){
+                    $email = mysqli_real_escape_string($con,$_POST['email']);
+                    $password = mysqli_real_escape_string($con,$_POST['password']);
+
+                    $result = mysqli_query($con, "SELECT * FROM users WHERE Email='$email' AND Password='$password'") or die("Select Error");
+                    $row = mysqli_etch_assoc($result);
+
+                    if(is_array($row) && !empty($row)){
+                        $_SESSION['Valid'] = $row['Email'];
+                        $_SESSION['username'] = $row['Username'];
+                        $_SESSION['age'] = $row['Age'];
+                        $_SESSION['id'] = $row['Id'];
+
+                    }else{
+                        echo "<div class='message'>
+                        <p>Password ou Email errado</p>
+                    </div> <br>";
+                        echo "<a href='index.php'><button class='btn'>Voltar Atrás</buttom>";
+                    }
+                    if(isset($_SESSION['valid'])){
+                        header("Location: homepage.php")
+                    }
+                }else{
+
+                ?>
                 <div class="header">Login</div>
                 <form action="" method="post">
                     <div class="field input">
@@ -38,9 +69,9 @@
                 <div class="links">
                     Não tens conta? <a href="registro.html">Clica aqui</a>
                 </div>
-            </div>
-            
+            </div> 
         </div>
+        <?php } ?>
     </main>
 </body>
 </html>
