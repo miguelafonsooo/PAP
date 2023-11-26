@@ -54,8 +54,8 @@
                 <div class="header">Login</div>
                 <form action="" method="post">
                     <div class="field input">
-                        <label for="username">Username</label>
-                        <input type="text" name="username" id="username" autocomplete="off">
+                        <label for="email">Email</label>
+                        <input type="text" name="email" id="email" autocomplete="off">
                     </div>
                     <div class="field input">
                         <label for="password">Password</label>
