@@ -1,3 +1,13 @@
+<?php
+    session_start();
+
+    include("php/config.php");
+    if(!isset($_SESSION['valid'])){
+        header("Location: login.php");
+
+
+    }
+?>
 <!DOCTYPE html>
 <html lang="pt-pt">
 <head>
@@ -10,28 +20,53 @@
     <header>
         <h1><a href="index.html">Máquina de Vendas</a></h1>
         <nav>
-            <a href="#">Login</a>
-            <a href="#">Criar Conta</a>
             <a href="sobrenos.html">Sobre Nós</a>
-            <a href="#"></a>
         </nav>
     </header>
     <main>
         <div class="container">
             <div class="box form-box">
-                <div class="header">Registro</div>
+                <?php
+                if(isset($_POST['submit'])){
+                    $username = $_POST['username'];
+                    $email = $_POST['email'];
+                    $age = $_POST['age'];
+                    $id = $_SESSION['id'];
+
+                    $edit_query = mysqli_query($con, "UPDATE users SET Username='$username', Email='$email', Age='$age' WHERE Id=$id") or die("Error Ocurred");
+
+                    if($edit_query){
+                        echo "<div class='message'>
+                        <p>Perfil Atualizado!</p>
+                    </div> <br>";
+                        echo "<a href='homepage.php'><button class='btn'>Voltar Atrás</buttom>";
+                    }
+                }else{
+
+                $id = $_SESSION['id'];
+                $query = mysqli_query($con,"SELECT*FROM users WHERE ID=$id");
+
+                while($result = mysqli_fetch_assoc($query)){
+                    $res_Uname = $result['Username'];
+                    $res_Email = $result['Email'];
+                    $res_Age = $result['Age'];
+                }
+                
+                ?>
+
+                <div class="header">Editar Perfil</div>
                 <form action="" method="post">
                     <div class="field input">
                         <label for="username">Username</label>
-                        <input type="text" name="username" id="username" autocomplete="off">
+                        <input type="text" name="username" id="username" value="<?php echo $res_Uname; ?>" autocomplete="off">
                     </div>
                     <div class="field input">
                         <label for="email">Email</label>
-                        <input type="text" name="email" id="email" autocomplete="off">
+                        <input type="text" name="email" id="email" value="<?php echo $res_Email; ?>" autocomplete="off">
                     </div>
                     <div class="field input">
                         <label for="age">Idade</label>
-                        <input type="number" name="age" id="age" autocomplete="off">
+                        <input type="number" name="age" id="age" value="<?php echo $res_Age; ?>" autocomplete="off">
                     </div>
                     <div class="field">
                         <input type="submit" class="
@@ -41,6 +76,7 @@
             </div>
             
         </div>
+        <?php } ?>
     </main>
 </body>
 </html>

@@ -13,10 +13,9 @@
     <header>
         <h1><a href="index.html">Máquina de Vendas</a></h1>
         <nav>
-            <a href="#">Login</a>
-            <a href="#">Criar Conta</a>
+            <a href="login.p+hp">Login</a>
+            <a href="registro.php">Criar Conta</a>
             <a href="sobrenos.html">Sobre Nós</a>
-            <a href="#"></a>
         </nav>
     </header>
     <main>
