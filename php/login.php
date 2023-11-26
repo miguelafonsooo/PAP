@@ -30,8 +30,7 @@
                     $password = mysqli_real_escape_string($con,$_POST['password']);
 
                     $result = mysqli_query($con, "SELECT * FROM users WHERE Email='$email' AND Password='$password'") or die("Select Error");
-
-                    $row = mysqli_etch_assoc($result);
+                    $row = mysqli_fetch_assoc($result);
 
                     if(is_array($row) && !empty($row)){
                         $_SESSION['email'] = $row['Email'];
