@@ -67,7 +67,7 @@
                     </div>
                 </form>
                 <div class="links">
-                    Não tens conta? <a href="registro.html">Clica aqui</a>
+                    Não tens conta? <a href="registro.php">Clica aqui</a>
                 </div>
             </div> 
         </div>
