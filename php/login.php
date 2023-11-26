@@ -13,7 +13,7 @@
     <header>
         <h1><a href="index.html">Máquina de Vendas</a></h1>
         <nav>
-            <a href="login.p+hp">Login</a>
+            <a href="login.php">Login</a>
             <a href="registro.php">Criar Conta</a>
             <a href="sobrenos.html">Sobre Nós</a>
         </nav>
