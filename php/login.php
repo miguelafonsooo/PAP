@@ -42,7 +42,7 @@
                         echo "<div class='message'>
                         <p>Password ou Email errado</p>
                     </div> <br>";
-                        echo "<a href='index.php'><button class='btn'>Voltar Atrás</buttom>";
+                        echo "<a href='login.php'><button class='btn'>Voltar Atrás</buttom>";
                     }
                     if(isset($_SESSION['valid'])){
                         header("Location: homepage.php");
