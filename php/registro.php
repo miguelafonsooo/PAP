@@ -47,7 +47,7 @@ else {
     echo "<div class='message'>
                 <p>Registro Completo!</p>
             </div> <br>";
-    echo "<a href='index.php'><button class='btn'>Logar Agora</buttom>";
+    echo "<a href='login.php'><button class='btn'>Logar Agora</buttom>";
 }
 
 }else{
