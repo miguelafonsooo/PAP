@@ -1,10 +1,40 @@
 <?php
     session_start();
     include("php/config.php");
+
+    // Redirecionar se já estiver logado
     if(isset($_SESSION['valid'])){
         header("Location: homepage.php");
+        exit();
+    }
+
+    if(isset($_POST['submit'])){
+        $email = mysqli_real_escape_string($con, $_POST['email']);
+
+        // Use instrução preparada para evitar injeção SQL
+        $stmt = mysqli_prepare($con, "SELECT * FROM users WHERE Email=?");
+        mysqli_stmt_bind_param($stmt, 's', $email);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+        $row = mysqli_fetch_assoc($result);
+
+        if($row && password_verify($_POST['password'], $row['Password'])){
+            // A senha está correta
+            $_SESSION['valid'] = $row['Email'];
+            $_SESSION['username'] = $row['Username'];
+            $_SESSION['age'] = $row['Age'];
+            $_SESSION['id'] = $row['Id'];
+            header("Location: homepage.php");
+            exit();
+        } else {
+            // A senha ou o email estão incorretos
+            $error_message = "Email ou senha incorretos";
+        }
+
+        mysqli_stmt_close($stmt);
     }
 ?>
+
 <!DOCTYPE html>
 <html lang="pt-pt">
 <head>
@@ -26,34 +56,6 @@
     <main>
         <div class="container">
             <div class="box form-box">
-                <?php
-                
-                include("php/config.php");
-                if(isset($_POST['submit'])){
-                    $email = mysqli_real_escape_string($con,$_POST['email']);
-                    $password = mysqli_real_escape_string($con,$_POST['password']);
-
-                    $result = mysqli_query($con, "SELECT * FROM users WHERE Email='$email' AND Password='$password'") or die("Select Error");
-                    $row = mysqli_fetch_assoc($result);
-
-                    if(is_array($row) && !empty($row)){
-                        $_SESSION['valid'] = $row['Email'];
-                        $_SESSION['username'] = $row['Username'];
-                        $_SESSION['age'] = $row['Age'];
-                        $_SESSION['id'] = $row['Id'];
-
-                    }else{
-                        echo "<div class='message'>
-                        <p>Password ou Email errado</p>
-                    </div> <br>";
-                        echo "<a href='login.php'><button class='btn'>Voltar Atrás</buttom>";
-                    }
-                    if(isset($_SESSION['valid'])){
-                        header("Location: homepage.php");
-                    }
-                }else{
-
-                ?>
                 <div class="header">Login</div>
                 <form action="" method="post">
                     <div class="field input">
@@ -65,17 +67,22 @@
                         <input type="password" name="password" id="password" autocomplete="off">
                     </div>
                     <div class="field">
-                        
-                        <input type="submit" class="
-                        btn" name="submit" value="Login">
+                        <input type="submit" class="btn" name="submit" value="Login">
                     </div>
                 </form>
+                <?php 
+                    // Adicionando um bloco para exibir mensagens de erro
+                    if(isset($error_message)){
+                        echo "<div class='message'>
+                              <br><p>{$error_message}</p>
+                              </div> <br>";
+                    }
+                ?>
                 <div class="links">
                     Não tens conta? <a href="registro.php">Clica aqui</a>
                 </div>
             </div> 
         </div>
-        <?php } ?>
     </main>
 </body>
 </html>

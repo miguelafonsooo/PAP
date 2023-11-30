@@ -37,6 +37,7 @@ if(isset($_POST['submit'])){
     $email = $_POST['email'];
     $age = $_POST['age'];
     $password = $_POST['password'];
+    $password_cripto = password_hash($password, PASSWORD_DEFAULT);
 
     //verificando o email unico
 
@@ -50,7 +51,7 @@ if(mysqli_num_rows($verify_query) !=0) {
 
 }
 else {
-    mysqli_query($con, "INSERT INTO users(Username,Email,Age,Password) VALUES('$username','$email','$age','$password')") or die ("Error Ocurred");
+    mysqli_query($con, "INSERT INTO users(Username,Email,Age,Password) VALUES('$username','$email','$age','$password_cripto')") or die ("Error Ocurred");
     
     echo "<div class='message'>
                 <p>Registro Completo!</p>
