@@ -27,7 +27,7 @@
             header("Location: homepage.php");
             exit();
         } else {
-            // A senha ou o email estão incorretos
+            
             $error_message = "Email ou senha incorretos";
         }
 
@@ -71,7 +71,7 @@
                     </div>
                 </form>
                 <?php 
-                    // Adicionando um bloco para exibir mensagens de erro
+                    
                     if(isset($error_message)){
                         echo "<div class='message'>
                               <br><p>{$error_message}</p>

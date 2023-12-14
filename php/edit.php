@@ -32,13 +32,13 @@
                     $email = $_POST['email'];
                     $age = $_POST['age'];
 
-                    // Verificar se uma nova senha foi fornecida
+                    
                     if (!empty($_POST['password'])) {
                         $password = $_POST['password'];
                         $password_cripto = password_hash($password, PASSWORD_DEFAULT);
                         $password_update = ", Password='$password_cripto'";
                     } else {
-                        $password_update = ""; // Não atualizar a senha se não houver uma nova senha
+                        $password_update = ""; 
                     }
 
                     $id = $_SESSION['id'];
@@ -60,7 +60,7 @@
                         $res_Uname = $result['Username'];
                         $res_Email = $result['Email'];
                         $res_Age = $result['Age'];
-                        // Não inclua a senha no formulário de edição
+                        
                     }
                 ?>
 
