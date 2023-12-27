@@ -246,7 +246,8 @@ main h1 {
 /******HOMEPAGE*******/
 
 .homepage{
- padding-left: 200px;
+ padding:0px 100px;
+ text-align: center;
 }
 
 .homepage h1 {
@@ -268,7 +269,7 @@ main h1 {
 }
 
 .homepage h2 {
-  margin-top: 100px;
+  margin: 50px 0px;
   text-align: center;
   font-size: 2em;
   color: white;
@@ -276,10 +277,9 @@ main h1 {
 
 .homepage .links{
   display: block;
-  text-align: center;
   text-decoration: none;
   color: white;
-  margin: 100px 300px;
+  margin: 100px auto;
   font-size: 2em;
   background: var(--cor-3);
   font-weight: bolder;
@@ -322,7 +322,7 @@ main h1 {
   }
 
   main h1 {
-    padding: 200px 0px 0px 0px;
+    padding: 50px 0px;
     font-size: 2em;
   }
 
