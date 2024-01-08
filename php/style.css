@@ -279,7 +279,7 @@ main h1 {
   display: block;
   text-decoration: none;
   color: white;
-  margin: 100px auto;
+  margin: 30px 120px;
   font-size: 2em;
   background: var(--cor-3);
   font-weight: bolder;

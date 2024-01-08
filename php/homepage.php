@@ -51,7 +51,11 @@
 
         <h2>Queres editar o teu perfil? Clica aqui em baixo!</h2>
 
-        <?php echo "<a href=edit.php?Id='$res_id' class='links'>Editar Perfil</a>"; ?>     
+        <?php echo "<a href='edit.php'?Id='$res_id' class='links'>Editar Perfil</a>"; ?>
+        
+        <h2>Queres registar o cartão? Clica aqui em baixo!</h2>
+
+        <?php echo"<a href='registrocartao.php'?Id='$res_id' class='links'> Registar Cartão</a>;" ?>
     </main>
 </div>
 </body>

@@ -62,8 +62,6 @@ else {
 }else{
 
 ?>
-
-
                 <div class="header">Registro</div>
                 <form action="" method="post">
                     <div class="field input">
@@ -89,7 +87,7 @@ else {
                     </div>
                 </form>
                 <div class="links">
-                    Já és membro? <a href="login.html">Clica aqui</a>
+                    Já és membro? <a href="login.php">Clica aqui</a>
                 </div>
             </div>
         </div>
