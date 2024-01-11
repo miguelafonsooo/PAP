@@ -21,6 +21,7 @@
         <h1><a href="index.html">Máquina de Vendas</a></h1>
         <nav>
             <a href="sobrenos.html">Sobre Nós</a>
+            <a href="homepage.php">Voltar Atrás</a>
         </nav>
     </header>
     <main>
