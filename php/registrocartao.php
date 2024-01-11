@@ -23,11 +23,13 @@
             <a href="index.html">Máquina de Vendas</a>
         </h1>
         <nav>
-            <a href="login.php">Login</a>
-            <a href="registro.php">Criar Conta</a>
             <a href="sobrenos.html">Sobre Nós</a>
+            <a href="homepage.php">Voltar Atrás</a>
         </nav>
-    </header>
-    <main>
+</header>
+<main>
+    <h1>Registrar</h1>
+    
+</main>
 </body>
 </html>
