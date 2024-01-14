@@ -55,7 +55,7 @@
         
         <h2>Queres registar o cartão? Clica aqui em baixo!</h2>
 
-        <?php echo"<a href='registrocartao.php'?Id='$res_id' class='links'> Registar Cartão</a>;" ?>
+        <?php echo"<a href='registrocartao.php'?Id='$res_id' class='links'> Registar Cartão</a>" ?>
     </main>
 </div>
 </body>
