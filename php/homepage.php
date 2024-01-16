@@ -37,6 +37,7 @@
             $res_Email = $result['Email'];
             $res_Age = $result['Age'];
             $res_id = $result['Id'];
+            $res_UID = $result['CardUID'];
         }
         
         
@@ -48,14 +49,15 @@
         ?></b> tudo bem?</p>
         <p>Tens <b><?php echo $res_Age?></b> anos.</p>
         <p>O teu email é <b><?php echo $res_Email ?></b>.</p>
+        <p>O teu ID de cartão é <b><?php echo $res_UID?></b></p>
 
         <h2>Queres editar o teu perfil? Clica aqui em baixo!</h2>
 
         <?php echo "<a href='edit.php'?Id='$res_id' class='links'>Editar Perfil</a>"; ?>
         
-        <h2>Queres registar o cartão? Clica aqui em baixo!</h2>
+        <h2>Queres alterar o cartão? Pede ajuda a um administrador e clica aqui!</h2>
 
-        <?php echo"<a href='registrocartao.php'?Id='$res_id' class='links'> Registar Cartão</a>" ?>
+        <?php echo"<a href='registrocartao.php'?Id='$res_id' class='links'> Alterar Cartão</a>" ?>
     </main>
 </div>
 </body>

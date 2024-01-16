@@ -1,0 +1,32 @@
+SDA (SS - Serial Data Line):
+
+Pino RC522: Conecte ao pino "SDA" no módulo RFID-RC522.
+Arduino Mega: Conecte ao pino D53.
+SCK (Serial Clock Line):
+
+Pino RC522: Conecte ao pino "SCK" no módulo RFID-RC522.
+Arduino Mega: Conecte ao pino D52.
+MOSI (Master Out Slave In):
+
+Pino RC522: Conecte ao pino "MOSI" no módulo RFID-RC522.
+Arduino Mega: Conecte ao pino D51.
+MISO (Master In Slave Out):
+
+Pino RC522: Conecte ao pino "MISO" no módulo RFID-RC522.
+Arduino Mega: Conecte ao pino D50.
+IRQ (Interrupt Request):
+
+Pino RC522: Não está sendo usado ("N/A" - Não conecte).
+Arduino Mega: Não está sendo usado ("N/A" - Não conecte).
+GND (Ground):
+
+Pino RC522: Conecte ao pino "GND" no módulo RFID-RC522.
+Arduino Mega: Conecte a qualquer pino GND no Arduino.
+RST (Reset):
+
+Pino RC522: Conecte ao pino "RST" no módulo RFID-RC522.
+Arduino Mega: Conecte ao pino D8.
+3.3V:
+
+Pino RC522: Conecte ao pino "3.3V" no módulo RFID-RC522.
+Arduino Mega: Conecte a qualquer pino 3.3V no Arduino.
