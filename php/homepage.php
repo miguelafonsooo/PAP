@@ -38,6 +38,7 @@
             $res_Age = $result['Age'];
             $res_id = $result['Id'];
             $res_UID = $result['CardUID'];
+            $res_Saldo = $result['Saldo'];
         }
         
         
@@ -50,6 +51,7 @@
         <p>Tens <b><?php echo $res_Age?></b> anos.</p>
         <p>O teu email é <b><?php echo $res_Email ?></b>.</p>
         <p>O teu ID de cartão é <b><?php echo $res_UID?></b></p>
+        <p>Tens <b><?php echo $res_Saldo ?></b>$ de saldo.</p>
 
         <h2>Coloca saldo aqui!</h2>
 
