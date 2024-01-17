@@ -1,7 +1,12 @@
-CREATE TABLE users(
+CREATE TABLE users (
     Id int PRIMARY KEY AUTO_INCREMENT,
     Username varchar(200),
     Email varchar(200),
     Age int,
-    Password varchar(200)
+    Password varchar(200),
+    CardUID varchar(20),
+    Saldo decimal(10,2) DEFAULT 0.00 -- Adiciona uma coluna "Saldo" com valor padrão 0.00
 );
+
+nome da base de dados= pap-maquina-de-vendas
+nome da tabela= users

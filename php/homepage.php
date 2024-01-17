@@ -51,6 +51,10 @@
         <p>O teu email é <b><?php echo $res_Email ?></b>.</p>
         <p>O teu ID de cartão é <b><?php echo $res_UID?></b></p>
 
+        <h2>Coloca saldo aqui!</h2>
+
+        <?php echo "<a href='saldo.php'?Id='$res_id' class='links'>Colocar Saldo</a>"; ?>
+
         <h2>Queres editar o teu perfil? Clica aqui em baixo!</h2>
 
         <?php echo "<a href='edit.php'?Id='$res_id' class='links'>Editar Perfil</a>"; ?>
