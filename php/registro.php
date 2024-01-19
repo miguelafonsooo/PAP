@@ -65,7 +65,7 @@ if (isset($_SESSION['valid'])) {
                     <div class="header">Registro</div>
                     <form action="" method="post">
                         <div class="field input">
-                            <label for="username">Nome</label>
+                            <label for="username">Nome Próprio</label>
                             <input type="text" name="username" id="username" autocomplete="off" required>
                         </div>
                         <div class="field input">
@@ -82,7 +82,7 @@ if (isset($_SESSION['valid'])) {
                         </div>
                         <!-- Adiciona um campo para o CardUID -->
                         <div class="field input">
-                            <label for="cardUID">UID do Cartão RFID</label>
+                            <label for="cardUID">UID do Cartão RFID (administrador necessário)</label>
                             <input type="text" name="cardUID" id="cardUID" autocomplete="off" required>
                         </div>
                         <div class="field">

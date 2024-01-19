@@ -19,30 +19,31 @@
     <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
 </head>
 <body>
+<?php
+
+$id = $_SESSION['id'];
+$query = mysqli_query($con,"SELECT*FROM users WHERE id=$id");
+
+while($result = mysqli_fetch_assoc($query)){
+    $res_Uname = explode(' ', $result['Username'])[0];
+    $res_Email = $result['Email'];
+    $res_Age = $result['Age'];
+    $res_id = $result['Id'];
+    $res_UID = $result['CardUID'];
+    $res_Saldo = $result['Saldo'];
+}
+
+
+?>
     <header>
         <h1><a href="index.html">Máquina de Vendas</a></h1>
         <nav>
-            <a href="sobrenos.html">Sobre Nós</a>
+            <?php echo "<a href='edit.php'?Id='$res_id' class='links'>Editar Perfil</a>"; ?>
             <a href="php/logout.php">Sair da Conta</a>
         </nav>
     </header>
     <main>
-    <?php
 
-        $id = $_SESSION['id'];
-        $query = mysqli_query($con,"SELECT*FROM users WHERE id=$id");
-
-        while($result = mysqli_fetch_assoc($query)){
-            $res_Uname = $result['Username'];
-            $res_Email = $result['Email'];
-            $res_Age = $result['Age'];
-            $res_id = $result['Id'];
-            $res_UID = $result['CardUID'];
-            $res_Saldo = $result['Saldo'];
-        }
-        
-        
-    ?>
 <div class="homepage">
     
         <h1>Bem Vindo <?php echo $res_Uname?></h1>
@@ -56,10 +57,6 @@
         <h2>Coloca saldo aqui!</h2>
 
         <?php echo "<a href='saldo.php'?Id='$res_id' class='links'>Colocar Saldo</a>"; ?>
-
-        <h2>Queres editar o teu perfil? Clica aqui em baixo!</h2>
-
-        <?php echo "<a href='edit.php'?Id='$res_id' class='links'>Editar Perfil</a>"; ?>
         
         <h2>Queres alterar o cartão? Pede ajuda a um administrador e clica aqui!</h2>
 

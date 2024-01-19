@@ -33,7 +33,7 @@ header {
   position: fixed;
 }
 
-h1 a {
+header h1 a {
   text-decoration: none;
   color: black;
 }
@@ -51,7 +51,7 @@ header h1:hover {
   font-size: 3em;
 }
 
-nav a {
+header nav a {
   padding: 30px;
   left: 30px;
   text-decoration: none;
@@ -96,7 +96,7 @@ main h1 {
 }
 
 .conteudo p {
-  text-align: left;
+  text-align: center;
   color: #F6F6F6;
   text-indent: 30px;
   font-weight: bold;
@@ -326,7 +326,7 @@ main h1 {
     font-size: 1em;
   }
 
-  .h2index h2 {
+  .h2index h2  {
     margin: 0px;
     padding: 0px;
     font-size: 1.5em;

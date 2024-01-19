@@ -12,7 +12,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registar Cartão</title>
+    <title>Alterar Cartão</title>
     <link rel="stylesheet" href="style.css">
     <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
 </head>
@@ -20,7 +20,6 @@
     <header>
         <h1><a href="index.html">Máquina de Vendas</a></h1>
         <nav>
-            <a href="sobrenos.html">Sobre Nós</a>
             <a href="homepage.php">Voltar Atrás</a>
         </nav>
     </header>
