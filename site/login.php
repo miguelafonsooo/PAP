@@ -54,9 +54,17 @@
         </nav>
     </header>
     <main>
-        <div class="container">
+        <div class="caixa">
             <div class="box form-box">
                 <div class="header">Login</div>
+                <?php 
+                    
+                    if(isset($error_message)){
+                        echo "<div class='message'>
+                              <p>{$error_message}</p>
+                              </div>";
+                    }
+                ?>
                 <form action="" method="post">
                     <div class="field input">
                         <label for="email">Email</label>
@@ -70,14 +78,7 @@
                         <input type="submit" class="btn" name="submit" value="Login">
                     </div>
                 </form>
-                <?php 
-                    
-                    if(isset($error_message)){
-                        echo "<div class='message'>
-                              <br><p>{$error_message}</p>
-                              </div> <br>";
-                    }
-                ?>
+                
                 <div class="links">
                     Não tens conta? <a href="registro.php">Clica aqui</a>
                 </div>

@@ -14,7 +14,7 @@ void setup() {
 
 void loop() {
   if (mfrc522.PICC_IsNewCardPresent() && mfrc522.PICC_ReadCardSerial()) {
-    Serial.println("Card detected!");
+    Serial.println("Cartão Detectado!");
 
     String cardUID = "";
     for (byte i = 0; i < mfrc522.uid.size; i++) {

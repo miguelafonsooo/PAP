@@ -24,7 +24,7 @@
         </nav>
     </header>
     <main>
-        <div class="container">
+        <div class="caixa">
             <div class="box form-box">
                 <?php
                 if(isset($_POST['submit'])){
@@ -49,7 +49,7 @@
                         echo "<div class='message'>
                         <p>Perfil Atualizado!</p>
                     </div> <br>";
-                        echo "<a href='homepage.php'><button class='btn'>Voltar Atrás</button></a>";
+                    echo "<a href='homepage.php' class='btn'>Voltar Atrás</a>";
                     }
                 }else{
 

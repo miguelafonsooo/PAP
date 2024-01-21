@@ -27,7 +27,7 @@ if (isset($_SESSION['valid'])) {
         </nav>
     </header>
     <main>
-        <div class="container">
+        <div class="caixa">
             <div class="box form-box">
 
 
@@ -42,14 +42,13 @@ if (isset($_SESSION['valid'])) {
                     $password_cripto = password_hash($password, PASSWORD_DEFAULT);
                     $cardUID = $_POST['cardUID'];
 
-                    // Verifica se o email é único
                     $verify_query = mysqli_query($con, "SELECT Email FROM users WHERE Email='$email'");
 
                     if (mysqli_num_rows($verify_query) != 0) {
                         echo "<div class='message'>
                                 <p>Este email está a ser usado, Tenta outro por favor</p>
                             </div> <br>";
-                        echo "<a href='javascript:self.history.back()'><button class='btn'>Voltar Atrás</button>";
+                        echo "<a href='javascript:self.history.back()' class='btn'>Voltar Atrás</a>";
 
                     } else {
                         mysqli_query($con, "INSERT INTO users (Username, Email, Age, Password, CardUID) VALUES ('$username', '$email', '$age', '$password_cripto', '$cardUID')") or die("Error Ocurred");
@@ -57,7 +56,7 @@ if (isset($_SESSION['valid'])) {
                         echo "<div class='message'>
                                 <p>Registro Completo!</p>
                             </div> <br>";
-                        echo "<a href='login.php'><button class='btn'>Logar Agora</button>";
+                            echo "<a href='login.php' class='btn'>Logar Agora</a>";
                     }
                 } else {
 
@@ -80,7 +79,6 @@ if (isset($_SESSION['valid'])) {
                             <label for="password">Palavra-Passe</label>
                             <input type="password" name="password" id="password" autocomplete="off" required>
                         </div>
-                        <!-- Adiciona um campo para o CardUID -->
                         <div class="field input">
                             <label for="cardUID">UID do Cartão RFID (administrador necessário)</label>
                             <input type="text" name="cardUID" id="cardUID" autocomplete="off" required>

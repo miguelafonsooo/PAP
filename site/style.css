@@ -19,6 +19,7 @@
 }
 
 body {
+  background: linear-gradient(to bottom, #F6F6F6 30%, #4182d9 80%);
   background-image: url(images/back.png);
   background-position: left center;
   background-size: cover;
@@ -101,12 +102,17 @@ main h1 {
   text-indent: 30px;
   font-weight: bold;
   font-size: 50px;
+  padding: 20px 0;
 }
 
 .conteudo img {
   margin-right: auto;
   width: 30%;
   margin-left: 20px;
+}
+
+#finalbox {
+  margin-top: 20px;
 }
 
 #finalbox img {
@@ -116,7 +122,7 @@ main h1 {
 #finalbox p {
   display: block;
   text-align: center;
-  padding-right: 100px;
+  padding-right: 30px;
 }
 
 #finalbox a {
@@ -167,11 +173,11 @@ main h1 {
 
 
 /****** Parte do login, registro, alterar perfil (form)******/
-.container {
+.caixa {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 90vh;
+  min-height: 110vh;
 }
 
 .box {
@@ -214,6 +220,10 @@ main h1 {
 }
 
 .btn {
+  
+  display: flexbox;
+  text-decoration: none;
+  align-items: center;
   height: 35px;
   background: var(--cor-3);
   border: 0;
@@ -223,11 +233,27 @@ main h1 {
   cursor: pointer;
   transition: all .3s;
   margin-top: 10px;
-  padding: 0 10px;
+  width: 100%;
+  text-align: center;
+  line-height: 35px;
+  margin-left: auto;
+  margin-right: auto;
+  outline: none;
 }
+
+.btn a {
+  text-decoration: none;
+}
+
+.btn > a {
+  text-decoration: none;
+}
+
+
 
 .btn:hover {
   opacity: 0.82;
+  text-decoration: none;
 }
 
 .submit {
@@ -239,6 +265,8 @@ main h1 {
 }
 
 .message{
+  display: inline-block;
+  align-items: center;
   text-align: center;
   font-weight: bolder;
 }
@@ -254,6 +282,13 @@ main h1 {
   padding-bottom: 100px;
 }
 
+.homepage h2 {
+  margin: 50px 0px;
+  text-align: center;
+  font-size: 2em;
+  color: white;
+}
+
 .homepage p {
   color: white;
   font-size: 2em;
@@ -266,13 +301,6 @@ main h1 {
   align-items: center;
   text-align: center;
   
-}
-
-.homepage h2 {
-  margin: 50px 0px;
-  text-align: center;
-  font-size: 2em;
-  color: white;
 }
 
 .homepage .links{
@@ -293,6 +321,7 @@ main h1 {
 
 
   header {
+    padding-bottom: 20px;
     font-size: 0.7em;
     text-align: center;
     background-color: #F6F6F6;
@@ -307,9 +336,10 @@ main h1 {
     font-size: 30px;
   }
 
-  nav a {
+  header nav a {
+    padding: 0;
     font-size: 20px;
-    padding: 7px;
+    margin: 0px 7px;
   }
 
   main {
@@ -317,19 +347,20 @@ main h1 {
   }
 
   .conteudo p {
-    font-size: 1.3em;
-    padding: 0px 30px;
+    font-size: 1em;
+    padding: 20px 30px;
   }
 
   main h1 {
-    padding: 50px 0px;
-    font-size: 1em;
+    padding-top: 120px;
+    padding-bottom: 20px;
+    font-size: 3em;
   }
 
   .h2index h2  {
     margin: 0px;
-    padding: 0px;
-    font-size: 1.5em;
+    padding: 0 10px;
+    font-size: 1em;
     text-align: center;
   }
 
@@ -339,7 +370,7 @@ main h1 {
 
   #finalbox a {
     line-height: 50px;
-    padding-left: 10px;
+    padding-left: 0px;
   }
 
   #finalbox a:hover {
@@ -347,16 +378,21 @@ main h1 {
   }
 
   #margin {
+    margin-top: 20px;
     padding: 0px;
-    padding-right: 30px;
   }
 
   #boxsobre p {
     text-align: center;
     margin: auto;
-    font-size: 1.2em;
+    font-size: 1em;
     margin: 20px;
     padding: 0px;
+  }
+
+  #boxsobre h2 {
+    font-size: 1.3em;
+    text-decoration: underline;
   }
 
   body {
@@ -366,10 +402,28 @@ main h1 {
   .homepage {
     padding: 0;
   }
-  .homepage .links{
+
+  .homepage h1 {
+    padding-bottom: 20px;
     
-    margin:30px 100px;
-  
   }
+
+  .homepage h2 {
+    font-size: 1.7em;
+  }
+
+  .homepage p {
+    font-size: 1.5em;
+    padding: 5px 20px;
+  }
+
+  .homepage .links{
+    font-size: 1.5em;
+    margin:30px 100px;
+    text-align: center;
+  }
+
+  /**LOGIN E REGISTRO**/
   
 }
+
