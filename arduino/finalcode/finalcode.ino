@@ -1,7 +1,7 @@
 #include <SPI.h>
 #include <MFRC522.h>
 
-#define SS_PIN 53  // Pino para SDA (SS) no Arduino Mega
+#define SS_PIN 53       // Pino para SDA (SS) no Arduino Mega
 #define RST_PIN 8
 
 MFRC522 mfrc522(SS_PIN, RST_PIN);
@@ -10,6 +10,7 @@ void setup() {
   Serial.begin(9600);
   SPI.begin();
   mfrc522.PCD_Init();
+  delay(1000);
 }
 
 void loop() {
@@ -24,21 +25,23 @@ void loop() {
     Serial.print("Card UID: ");
     Serial.println(cardUID);
 
-    // Envia o UID para o computador via porta serial
+    // Envia o UID para o Node-RED via porta serial
     Serial.print("UID:");
     Serial.println(cardUID);
 
-    // Aguarda um pouco para evitar leituras múltiplas
-    delay(1000);
+    // Aguarda a resposta do Node-RED
+    while (Serial.available() == 0) {
+      // Aguarda a resposta
+    }
 
     // Lê e exibe o saldo recebido pela porta serial
-    if (Serial.available() > 0) {
-      String saldoData = Serial.readStringUntil('\n');
-      if (saldoData.startsWith("Saldo:")) {
-        String saldo = saldoData.substring(6);
-        Serial.print("Saldo Atual: ");
-        Serial.println(saldo);
-      }
+    String saldoData = Serial.readStringUntil('\n');
+    if (saldoData.startsWith("Saldo:")) {
+      String saldo = saldoData.substring(6);
+      Serial.print("Saldo Atual: ");
+      Serial.println(saldo);
     }
+
+    delay(1000);
   }
 }

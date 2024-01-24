@@ -24,6 +24,21 @@ void loop() {
     Serial.print("Card UID: ");
     Serial.println(cardUID);
 
+    // Envia o UID para o computador via porta serial
+    Serial.print("UID:");
+    Serial.println(cardUID);
+
+    // Aguarda um pouco para evitar leituras múltiplas
     delay(1000);
+
+    // Lê e exibe o saldo recebido pela porta serial
+    if (Serial.available() > 0) {
+      String saldoData = Serial.readStringUntil('\n');
+      if (saldoData.startsWith("Saldo:")) {
+        String saldo = saldoData.substring(6);
+        Serial.print("Saldo Atual: ");
+        Serial.println(saldo);
+      }
+    }
   }
 }
