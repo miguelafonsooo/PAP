@@ -1,56 +1,8 @@
 [
     {
-        "id": "6ca516dcdd8a5959",
-        "type": "tab",
-        "label": "Fluxo 1",
-        "disabled": false,
-        "info": "",
-        "env": []
-    },
-    {
-        "id": "59b699743994d035",
-        "type": "serial in",
-        "z": "6ca516dcdd8a5959",
-        "x": 130,
-        "y": 180,
-        "wires": [
-            [
-                "30843edcd8909569"
-            ]
-        ]
-    },
-    {
-        "id": "5af7dee18103b5c5",
-        "type": "serial out",
-        "z": "6ca516dcdd8a5959",
-        "x": 810,
-        "y": 220,
-        "wires": []
-    },
-    {
-        "id": "30843edcd8909569",
+        "id": "ad56b71254700c38",
         "type": "function",
-        "z": "6ca516dcdd8a5959",
-        "name": "function 1",
-        "func": "// Extrair UID do payload\nvar cardUID = msg.payload.trim();  // Remover espaços em branco extras, se houver\n\n// Exibir UID no console (opcional)\nconsole.log(\"Card UID:\", cardUID);\n\n// Limpar UID, removendo caracteres não hexadecimais\ncardUID = cardUID.replace(/[^0-9a-fA-F]/g, '');\n\n// Validar UID (opcional)\nif (!cardUID.match(/^[0-9a-fA-F]+$/)) {\n    console.error(\"UID não é válido após a limpeza.\");\n    return null;  // Abortar a execução se o UID não for válido\n}\n\n// Criar a consulta SQL\nvar query = \"SELECT saldo FROM users WHERE cardUID = '\" + cardUID + \"'\";\nmsg.topic = \"SELECT\";\nmsg.payload = query;\n\nconsole.log(\"Consulta SQL:\", query);  // Adiciona esta linha para exibir a consulta no console\n\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 280,
-        "y": 180,
-        "wires": [
-            [
-                "9da4cac806694ec8"
-            ]
-        ]
-    },
-    {
-        "id": "533b5b97790a4e0d",
-        "type": "function",
-        "z": "6ca516dcdd8a5959",
+        "z": "908891cfc3f3e3e7",
         "name": "function 2",
         "func": "var saldo = msg.payload[0].saldo;\n\n// Exibir saldo no console (opcional)\nconsole.log(\"Saldo:\", saldo);\n\n// Adicionar saldo ao payload\nmsg.payload = saldo;\n\nreturn msg;",
         "outputs": 1,
@@ -59,36 +11,12 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 600,
-        "y": 360,
+        "x": 640,
+        "y": 300,
         "wires": [
             [
-                "5af7dee18103b5c5"
+                "9e9aad235950f1f1"
             ]
         ]
-    },
-    {
-        "id": "9da4cac806694ec8",
-        "type": "mysql",
-        "z": "6ca516dcdd8a5959",
-        "mydb": "f4063cddb9175b65",
-        "name": "",
-        "x": 510,
-        "y": 240,
-        "wires": [
-            [
-                "533b5b97790a4e0d"
-            ]
-        ]
-    },
-    {
-        "id": "f4063cddb9175b65",
-        "type": "MySQLdatabase",
-        "name": "pap-maquina-de-vendas",
-        "host": "127.0.0.1",
-        "port": "3306",
-        "db": "pap-maquina-de-vendas",
-        "tz": "",
-        "charset": "UTF8"
     }
 ]
