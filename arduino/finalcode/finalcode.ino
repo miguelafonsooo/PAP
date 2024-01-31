@@ -1,47 +1,33 @@
-#include <SPI.h>
-#include <MFRC522.h>
+#include <SoftwareSerial.h>
+#include <MySQL_Connection.h>
 
-#define SS_PIN 53       // Pino para SDA (SS) no Arduino Mega
-#define RST_PIN 8
+SoftwareSerial bluetooth(10, 11);  // RX, TX
+MySQL_Connection conn((Client *)&bluetooth);
 
-MFRC522 mfrc522(SS_PIN, RST_PIN);
+char user[] = "root";
+char password[] = "";
+char dbname[] = "pap-maquina-de-vendas";
+char server[] = "localhost";
 
 void setup() {
   Serial.begin(9600);
-  SPI.begin();
-  mfrc522.PCD_Init();
-  delay(1000);
+  bluetooth.begin(9600);
+
+  IPAddress serverAddress;
+  if (serverAddress.fromString(server)) {
+    Serial.println("Conectando ao banco de dados...");
+
+    if (conn.connect(serverAddress, 3306, user, password, dbname)) {
+      Serial.println("Conexão bem-sucedida!");
+    } else {
+      Serial.println("Falha na conexão ao banco de dados.");
+    }
+  } else {
+    Serial.println("Endereço do servidor inválido.");
+  }
 }
 
 void loop() {
-  if (mfrc522.PICC_IsNewCardPresent() && mfrc522.PICC_ReadCardSerial()) {
-    Serial.println("Cartão Detectado!");
-
-    String cardUID = "";
-    for (byte i = 0; i < mfrc522.uid.size; i++) {
-      cardUID += String(mfrc522.uid.uidByte[i], HEX);
-    }
-
-    Serial.print("Card UID: ");
-    Serial.println(cardUID);
-
-    // Envia o UID para o Node-RED via porta serial
-    Serial.print("UID:");
-    Serial.println(cardUID);
-
-    // Aguarda a resposta do Node-RED
-    while (Serial.available() == 0) {
-      // Aguarda a resposta
-    }
-
-    // Lê e exibe o saldo recebido pela porta serial
-    String saldoData = Serial.readStringUntil('\n');
-    if (saldoData.startsWith("Saldo:")) {
-      String saldo = saldoData.substring(6);
-      Serial.print("Saldo Atual: ");
-      Serial.println(saldo);
-    }
-
-    delay(1000);
-  }
+  // Se precisar adicionar lógica adicional, você pode fazer aqui
+  delay(1000);  // Aguarde um curto período antes de tentar novamente
 }
