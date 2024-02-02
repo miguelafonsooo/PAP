@@ -1,33 +1,42 @@
-#include <SoftwareSerial.h>
-#include <MySQL_Connection.h>
+#include <SPI.h>
+#include <MFRC522.h>
 
-SoftwareSerial bluetooth(10, 11);  // RX, TX
-MySQL_Connection conn((Client *)&bluetooth);
+#define SS_PIN 53  // Pino para SDA (SS) no Arduino Mega
+#define RST_PIN 8
+#define BUTTON_PIN 22 // Pino do botão
 
-char user[] = "root";
-char password[] = "";
-char dbname[] = "pap-maquina-de-vendas";
-char server[] = "localhost";
+MFRC522 mfrc522(SS_PIN, RST_PIN);
 
 void setup() {
   Serial.begin(9600);
-  bluetooth.begin(9600);
-
-  IPAddress serverAddress;
-  if (serverAddress.fromString(server)) {
-    Serial.println("Conectando ao banco de dados...");
-
-    if (conn.connect(serverAddress, 3306, user, password, dbname)) {
-      Serial.println("Conexão bem-sucedida!");
-    } else {
-      Serial.println("Falha na conexão ao banco de dados.");
-    }
-  } else {
-    Serial.println("Endereço do servidor inválido.");
-  }
+  SPI.begin();
+  mfrc522.PCD_Init();
+  pinMode(BUTTON_PIN, INPUT_PULLUP);
 }
 
 void loop() {
-  // Se precisar adicionar lógica adicional, você pode fazer aqui
-  delay(1000);  // Aguarde um curto período antes de tentar novamente
+  // Verificar se o botão foi pressionado
+  if (digitalRead(BUTTON_PIN) == LOW) {
+    Serial.println("Botão pressionado!");
+    // Adicione aqui a lógica para descontar o preço do produto
+    // Certifique-se de enviar um comando específico para o Node-RED, por exemplo, 'B'
+    Serial.println("B");
+    delay(1000); // Aguarde um pouco para evitar leituras múltiplas
+  }
+
+  // Lógica RFID aqui...
+  if (mfrc522.PICC_IsNewCardPresent() && mfrc522.PICC_ReadCardSerial()) {
+    Serial.println("Cartão Detectado!");
+
+    String cardUID = "";
+    for (byte i = 0; i < mfrc522.uid.size; i++) {
+      cardUID += String(mfrc522.uid.uidByte[i], HEX);
+    }
+
+    // Envia o UID para o computador via porta serial
+    Serial.println(cardUID);
+
+    // Aguarda um pouco para evitar leituras múltiplas
+    delay(1000);
+  }
 }
