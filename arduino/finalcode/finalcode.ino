@@ -17,7 +17,6 @@ void setup() {
 void loop() {
   // Verificar se o botão foi pressionado
   if (digitalRead(BUTTON_PIN) == LOW) {
-    Serial.println("Botão pressionado!");
     // Adicione aqui a lógica para descontar o preço do produto
     // Certifique-se de enviar um comando específico para o Node-RED, por exemplo, 'B'
     Serial.println("B");
@@ -26,8 +25,6 @@ void loop() {
 
   // Lógica RFID aqui...
   if (mfrc522.PICC_IsNewCardPresent() && mfrc522.PICC_ReadCardSerial()) {
-    Serial.println("Cartão Detectado!");
-
     String cardUID = "";
     for (byte i = 0; i < mfrc522.uid.size; i++) {
       cardUID += String(mfrc522.uid.uidByte[i], HEX);
