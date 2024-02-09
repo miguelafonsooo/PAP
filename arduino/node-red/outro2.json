@@ -1,0 +1,190 @@
+[
+    {
+        "id": "f64b6b2b.162d7",
+        "type": "tab",
+        "label": "Fluxo 1",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "50c2b69a.39b91c",
+        "type": "function",
+        "z": "f64b6b2b.162d7",
+        "name": "configurar dados",
+        "func": "var cardUID = global.get('cardUID');\nvar saldo = msg.payload[0] ? msg.payload[0].Saldo : 'N/A';\nvar botao = msg.botao;\nvar username = msg.payload[0] ? msg.payload[0].Username : 'N/A';\nvar userdecod = decodeURIComponent(escape(username));\n\nif (typeof global.get('saldo') === 'undefined' || global.get('saldo') === null) {\n   global.set('saldo', saldo);\n}\n\nif (botao === 'B') {\n   global.set('botao', botao);\n}\n\nif (cardUID === 'fedC0affeced1ed0fac' || cardUID === 'ca1' || cardUID === 'faa') {\n   global.set('cardUID', null);\n   return null;\n}\n\n\n\nif (msg.payload.length > 0 && botao !== 'B') {\n   console.log(\"Olá \" + userdecod + \"! Tens \" + saldo + \" de saldo no cartão \" + cardUID + \". Clica no botão para comprar!\");\n} else if (cardUID !== 'ca1' && cardUID !== 'faa' && cardUID !== 'fedC0affeced1ed0fac' && botao !== 'B') {\n   console.log(cardUID);\n   console.log(\"Cartão não registado!\");\n   return null;\n}else {\n   global.set('botao', null);\n}\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 770,
+        "y": 260,
+        "wires": [
+            [
+                "c400abcb32da0220"
+            ]
+        ]
+    },
+    {
+        "id": "55748befd99a42b8",
+        "type": "function",
+        "z": "f64b6b2b.162d7",
+        "name": "query cardUID / skip botão",
+        "func": "// Extrair UID do payload\nvar cardUID = (msg.payload && typeof msg.payload === 'string') ? msg.payload.trim() : '';\n\n// Se o valor for 'B', trata-se do botão B\nif (cardUID === 'B') {\n    console.log(\"Botão pressionado!\");\n    var botao = cardUID;\n    msg.botao = botao; // Adiciona a variável botao ao objeto msg\n    return [null ,msg]; // Saída para o botão\n} else {\n    // Se não for o botão, criar a consulta SQL e enviar para a base de dados\n    if (cardUID !== '') {\n        // Limpar UID, removendo caracteres não hexadecimais\n        cardUID = cardUID.replace(/[^0-9a-fA-F]/g, '');\n        global.set('cardUID', cardUID);\n\n        // Criar a consulta SQL apenas se for um UID válido\n        msg.topic = \"SELECT Saldo, Username FROM users WHERE CardUID = '\" + cardUID + \"';\";\n        return [msg, null]; // Saída para a base de dados\n    } else {\n        console.error(\"Card UID vazio.\");\n        return null; // Abortar se o UID do cartão estiver vazio\n    }\n}\n",
+        "outputs": 2,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 260,
+        "y": 260,
+        "wires": [
+            [
+                "f682ffaabb29abf9"
+            ],
+            [
+                "50c2b69a.39b91c"
+            ]
+        ]
+    },
+    {
+        "id": "f682ffaabb29abf9",
+        "type": "mysql",
+        "z": "f64b6b2b.162d7",
+        "mydb": "5854b7c08d8a89e0",
+        "name": "",
+        "x": 530,
+        "y": 220,
+        "wires": [
+            [
+                "50c2b69a.39b91c"
+            ]
+        ]
+    },
+    {
+        "id": "35962b098533c845",
+        "type": "serial in",
+        "z": "f64b6b2b.162d7",
+        "name": "",
+        "serial": "52c85ebdd645cea5",
+        "x": 230,
+        "y": 100,
+        "wires": [
+            [
+                "55748befd99a42b8"
+            ]
+        ]
+    },
+    {
+        "id": "c400abcb32da0220",
+        "type": "function",
+        "z": "f64b6b2b.162d7",
+        "name": "query cobrança",
+        "func": "var valorASubtrair = 10; // Valor a ser removido do saldo\nvar cardUID = global.get('cardUID');\nvar saldo = global.get(\"saldo\");\nvar botao = global.get(\"botao\")\nvar query = \"UPDATE users SET Saldo = Saldo - \" + valorASubtrair + \" WHERE CardUID = '\" + cardUID + \"'\";\n\nif(botao == \"B\") {\nmsg.topic = query;\n\nglobal.set('cardUID', null);\nglobal.set('saldo', null);\nglobal.set('botao', null);\n\nconsole.log(\"Compra realizada!\");\n\nreturn msg;\n\n\n} else {\n    return null;\n}\n\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 800,
+        "y": 320,
+        "wires": [
+            [
+                "a98ff36b44639012"
+            ]
+        ]
+    },
+    {
+        "id": "a98ff36b44639012",
+        "type": "mysql",
+        "z": "f64b6b2b.162d7",
+        "mydb": "5854b7c08d8a89e0",
+        "name": "",
+        "x": 810,
+        "y": 400,
+        "wires": [
+            [
+                "22d7abe8a2407da6"
+            ]
+        ]
+    },
+    {
+        "id": "f4dc9a002f0011d8",
+        "type": "serial out",
+        "z": "f64b6b2b.162d7",
+        "name": "Enviar para Arduino",
+        "serial": "1a8fcba4.973076",
+        "x": 650,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "22d7abe8a2407da6",
+        "type": "function",
+        "z": "f64b6b2b.162d7",
+        "name": "Enviar serial arduino",
+        "func": "// Primeira mensagem\nvar mensagem1 = { payload: \"compra1\" };\n// Segunda mensagem\nvar mensagem2 = { payload: \"finalizar\" };\n\n// Envie a primeira mensagem\nnode.send(mensagem1);\n\n// Adicione um atraso de 5 segundos antes de enviar a segunda mensagem\nsetTimeout(function () {\n    // Envie a segunda mensagem após o atraso\n    node.send(mensagem2);\n}, 3000); // Atraso de 5 segundos\n",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 500,
+        "wires": [
+            [
+                "f4dc9a002f0011d8"
+            ]
+        ]
+    },
+    {
+        "id": "5854b7c08d8a89e0",
+        "type": "MySQLdatabase",
+        "name": "pap-maquina-de-vendas",
+        "host": "127.0.0.1",
+        "port": "3306",
+        "db": "pap-maquina-de-vendas",
+        "tz": "",
+        "charset": "UTF8"
+    },
+    {
+        "id": "52c85ebdd645cea5",
+        "type": "serial-port",
+        "name": "",
+        "serialport": "/dev/tty.usbmodem1101",
+        "serialbaud": "9600",
+        "databits": "8",
+        "parity": "none",
+        "stopbits": "1",
+        "waitfor": "",
+        "dtr": "none",
+        "rts": "none",
+        "cts": "none",
+        "dsr": "none",
+        "newline": "\\n",
+        "bin": "false",
+        "out": "char",
+        "addchar": "",
+        "responsetimeout": "10000"
+    },
+    {
+        "id": "1a8fcba4.973076",
+        "type": "serial-port",
+        "name": "",
+        "serialport": "/dev/tty.usbmodem1101",
+        "serialbaud": "9600",
+        "databits": "8",
+        "parity": "none",
+        "stopbits": "1",
+        "waitfor": "",
+        "newline": "\\n",
+        "bin": "false",
+        "out": "char",
+        "addchar": "",
+        "responsetimeout": "10000"
+    }
+]

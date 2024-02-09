@@ -1,3 +1,4 @@
+#include <Servo.h>
 #include <SPI.h>
 #include <MFRC522.h>
 
@@ -5,13 +6,19 @@
 #define RST_PIN 8
 #define BUTTON_PIN 22 // Pino do botão
 
+Servo meuServo;  // Objeto do Servo
 MFRC522 mfrc522(SS_PIN, RST_PIN);
+
+unsigned long tempoInicial = 0;
+bool girarServo = false;
 
 void setup() {
   Serial.begin(9600);
   SPI.begin();
   mfrc522.PCD_Init();
   pinMode(BUTTON_PIN, INPUT_PULLUP);
+
+  meuServo.attach(9); // Conecta o servo ao pino digital 9
 }
 
 void loop() {
@@ -36,4 +43,24 @@ void loop() {
     // Aguarda um pouco para evitar leituras múltiplas
     delay(1000);
   }
+
+  // Verificar se a compra foi realizada através do monitor serial
+  if (Serial.available() > 0) {
+    String input = Serial.readStringUntil('\n'); // lê a entrada do Serial Monitor
+    Serial.println(input); // exibe a entrada recebida no Serial Monitor
+    if (input.equals("compra1")) {
+      moveServo(); // move o servo para 180 graus
+    } else if (input.equals("finalizar")) {
+      stopServo(); // para o servo
+    }
+  }
+}
+
+void moveServo() {
+  meuServo.write(180); // move o servo para 180 graus
+  delay(1000); // espera 1 segundo
+}
+
+void stopServo() {
+  meuServo.write(90); // para o servo na posição central (90 graus)
 }
