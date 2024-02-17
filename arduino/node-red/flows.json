@@ -1,113 +1,161 @@
 [
     {
-        "id": "7869be979f4028b5",
+        "id": "71ec1bcf124a1298",
         "type": "tab",
         "label": "Fluxo 1",
         "disabled": false,
-        "info": "",
-        "env": []
+        "info": ""
     },
     {
-        "id": "0345e18d3221f2bd",
-        "type": "serial in",
-        "z": "7869be979f4028b5",
-        "name": "",
-        "serial": "3ea0990259fc8187",
-        "x": 130,
-        "y": 180,
-        "wires": [
-            [
-                "bf9e1105e4e20834"
-            ]
-        ]
-    },
-    {
-        "id": "5e61badf598aa024",
-        "type": "serial out",
-        "z": "7869be979f4028b5",
-        "name": "",
-        "serial": "3ea0990259fc8187",
+        "id": "63ae3394780d516b",
+        "type": "function",
+        "z": "71ec1bcf124a1298",
+        "name": "Function 1",
+        "func": "var cardUID = global.get('cardUID');\nvar saldo = msg.payload[0] ? msg.payload[0].Saldo : 'N/A';\nvar botao = global.get('botao');\nvar username = msg.payload[0] ? msg.payload[0].Username : 'N/A';\nvar userdecod = decodeURIComponent(escape(username));\n\n\nif (botao === undefined || botao === null) {\n   if (msg.payload === 'B' || msg.payload === 'C' || msg.payload === 'D' || msg.payload === 'E') {\n      botao = msg.payload;\n      global.set('botao', botao);\n   }\n}\n\nif ((botao === 'B' || botao === 'C' || botao === 'D' || botao === 'E') && (cardUID === null || cardUID === undefined)) {\n   console.log(\"Por favor, passe o cartão primeiro.\");\n\n   global.set('cardUID', null);\n   global.set('saldo', null);\n   global.set('botao', null);\n\n   return null;\n} else if (cardUID === 'faa' || cardUID === 'ca1' || cardUID === 'ca2' || cardUID === 'ca3' || cardUID === 'ca4') {\n\n   global.set('cardUID', null);\n   return null;\n}\n\nif (cardUID.length > 0 && saldo === 'N/A') {\n   console.log(\"Cartão não registrado\");\n\n   global.set('cardUID', null);\n   global.set('saldo', null);\n   global.set('botao', null);\n\n   return null;\n}\nelse if (cardUID.length > 0 && botao !== 'B' && botao !== 'C' && botao !== 'D' && botao !== 'E') {\n      console.log(\"Olá \" + userdecod + \"! Tens \" + saldo + \"€ de saldo no cartão \" + cardUID + \". Clica no botão para comprar!\");\n      global.set('saldo', saldo);\n   }\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
         "x": 810,
-        "y": 220,
-        "wires": []
-    },
-    {
-        "id": "bf9e1105e4e20834",
-        "type": "function",
-        "z": "7869be979f4028b5",
-        "name": "function 1",
-        "func": "// Extrair UID do payload\nvar cardUID = (msg.payload && msg.payload.trim()) || ''; // Verifica se msg.payload existe antes de chamar trim()\n\n// Exibir UID no console (opcional)\nconsole.log(\"Card UID:\", cardUID);\n\n// Limpar UID, removendo caracteres não hexadecimais\ncardUID = cardUID.replace(/[^0-9a-fA-F]/g, '');\n\n// Validar UID (opcional)\nif (!cardUID.match(/^[0-9a-fA-F]+$/)) {\n    console.error(\"UID não é válido após a limpeza.\");\n    return null;  // Abortar a execução se o UID não for válido\n}\n\n// Criar a consulta SQL\nmsg.topic = \"SELECT Saldo, Username FROM users WHERE CardUID = '\" + cardUID + \"';\";\n\nreturn msg;\n",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 260,
-        "y": 240,
-        "wires": [
-            [
-                "d340e847361c8e92"
-            ]
-        ]
-    },
-    {
-        "id": "d988791fa63c92a1",
-        "type": "function",
-        "z": "7869be979f4028b5",
-        "name": "function 2",
-        "func": "\nvar cardUID = (msg.payload && typeof msg.payload === 'string') ? msg.payload.trim() : '';\nvar saldo = msg.payload[0] ? msg.payload[0].Saldo : 'N/A';\nvar username = msg.payload[0] ? msg.payload[0].Username : 'N/A';\nvar userdecod = decodeURIComponent(escape(username));\n\nif (msg.payload.length > 0) {\n    console.log(\"Olá \" + userdecod + \"! Tens \" + saldo + \" de saldo no Cartão.\");\n} else {\n    console.log(\"Cartão não registado!\");\n}\n\n// Verificar se a mensagem é um evento de controle do botão\nif (msg.hasOwnProperty('ui_control') && msg.ui_control.hasOwnProperty('event') && msg.ui_control.event === 'click') {\n    // Realizar desconto (exemplo de desconto de 5.99)\n    var desconto = 5.99;\n    \n    // Verificar se o saldo é suficiente para o desconto\n    if (saldo >= desconto) {\n        // Atualizar saldo na base de dados (você precisará implementar esta parte)\n        // Subtrair o valor do desconto do saldo atual\n        var novoSaldo = saldo - desconto;\n        console.log(\"Desconto de \" + desconto + \" aplicado. Novo saldo: \" + novoSaldo);\n        \n        // Aqui você deve implementar a lógica para atualizar o saldo na base de dados\n        // Certifique-se de usar uma instrução SQL UPDATE para atualizar o saldo do usuário\n    } else {\n        console.log(\"Saldo insuficiente para o desconto.\");\n    }\n}\n\nreturn null;  // Você pode ajustar isso conforme necessário\n",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 640,
-        "y": 360,
-        "wires": [
-            [
-                "5e61badf598aa024",
-                "dadd20a204f15906"
-            ]
-        ]
-    },
-    {
-        "id": "d340e847361c8e92",
-        "type": "mysql",
-        "z": "7869be979f4028b5",
-        "mydb": "f4063cddb9175b65",
-        "name": "",
-        "x": 470,
         "y": 260,
         "wires": [
             [
-                "d988791fa63c92a1"
+                "dfc6b582e1457211"
             ]
         ]
     },
     {
-        "id": "dadd20a204f15906",
-        "type": "debug",
-        "z": "7869be979f4028b5",
-        "name": "debug 2",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 820,
-        "y": 420,
+        "id": "34e84b8977425bb8",
+        "type": "function",
+        "z": "71ec1bcf124a1298",
+        "name": "function 1",
+        "func": "// Extrair UID do payload\nvar cardUID = (msg.payload && typeof msg.payload === 'string') ? msg.payload.trim() : '';\n\n// Se o valor for 'B', trata-se do botão B\nif (cardUID === 'B' || cardUID === 'C' || cardUID === 'D' || cardUID === 'E') {\n    var botao = cardUID;\n    return [null, { payload: botao }]; // Saída para o botão\n} else {\n    // Se não for o botão, criar a consulta SQL e enviar para a base de dados\n    if (cardUID !== '') {\n        // Limpar UID, removendo caracteres não hexadecimais\n        cardUID = cardUID.replace(/[^0-9a-fA-F]/g, '');\n        global.set('cardUID', cardUID);\n\n        // Criar a consulta SQL apenas se for um UID válido\n        msg.topic = \"SELECT Saldo, Username FROM users WHERE CardUID = '\" + cardUID + \"';\";\n        return [msg, null]; // Saída para a base de dados\n    } else {\n        console.error(\"Card UID vazio.\");\n        return null; // Abortar se o UID do cartão estiver vazio\n    }\n}\n",
+        "outputs": 2,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 300,
+        "y": 260,
+        "wires": [
+            [
+                "d11c3d2ff5103e77"
+            ],
+            [
+                "63ae3394780d516b"
+            ]
+        ]
+    },
+    {
+        "id": "d11c3d2ff5103e77",
+        "type": "mysql",
+        "z": "71ec1bcf124a1298",
+        "mydb": "5854b7c08d8a89e0",
+        "name": "",
+        "x": 530,
+        "y": 220,
+        "wires": [
+            [
+                "63ae3394780d516b"
+            ]
+        ]
+    },
+    {
+        "id": "1c9993b013631085",
+        "type": "serial in",
+        "z": "71ec1bcf124a1298",
+        "name": "",
+        "serial": "07b4baa3fb802ecc",
+        "x": 230,
+        "y": 100,
+        "wires": [
+            [
+                "34e84b8977425bb8"
+            ]
+        ]
+    },
+    {
+        "id": "8275aa689d3c13a4",
+        "type": "serial out",
+        "z": "71ec1bcf124a1298",
+        "name": "",
+        "serial": "23ba4eeac67fb88a",
+        "x": 1190,
+        "y": 240,
         "wires": []
     },
     {
-        "id": "3ea0990259fc8187",
+        "id": "dfc6b582e1457211",
+        "type": "function",
+        "z": "71ec1bcf124a1298",
+        "name": "function 2",
+        "func": "var valorASubtrair1 = 10;\nvar valorASubtrair2 = 5;\nvar valorASubtrair3 = 50;\nvar valorASubtrair4 = 20;\nvar cardUID = global.get('cardUID');\nvar saldo = global.get(\"saldo\");\nvar botao = global.get(\"botao\");\nvar query1 = \"UPDATE users SET Saldo = Saldo - \" + valorASubtrair1 + \" WHERE CardUID = '\" + cardUID + \"'\";\nvar query2 = \"UPDATE users SET Saldo = Saldo - \" + valorASubtrair2 + \" WHERE CardUID = '\" + cardUID + \"'\";\nvar query3 = \"UPDATE users SET Saldo = Saldo - \" + valorASubtrair3 + \" WHERE CardUID = '\" + cardUID + \"'\";\nvar query4 = \"UPDATE users SET Saldo = Saldo - \" + valorASubtrair4 + \" WHERE CardUID = '\" + cardUID + \"'\";\n\nif(botao === \"B\") {\n    if(valorASubtrair1 > saldo){\n        console.log(\"Saldo Insuficiente\");\n\n        global.set('cardUID', null);\n        global.set('saldo', null);\n        global.set('botao', null);\n\n        return null;\n    }\n\nmsg.topic = query1;\n\nglobal.set('cardUID', null);\nglobal.set('saldo', null);\n\nconsole.log(\"Compra realizada! Botão 1\");\n\nreturn msg;\n\n\n} else if(botao === \"C\"){\n    if (valorASubtrair2 > saldo) {\n        console.log(\"Saldo Insuficiente\");\n\n        global.set('cardUID', null);\n        global.set('saldo', null);\n        global.set('botao', null);\n\n        return null;\n    }\n\n    msg.topic = query2;\n\n    global.set('cardUID', null);\n    global.set('saldo', null);\n\n    console.log(\"Compra realizada! Botão 2\");\n\n    return msg;\n}else if (botao === \"D\") {\n    if (valorASubtrair3 > saldo) {\n        if (valorASubtrair1 > saldo) {\n            console.log(\"Saldo Insuficiente\");\n\n            global.set('cardUID', null);\n            global.set('saldo', null);\n            global.set('botao', null);\n\n            return null;\n        }\n\n        console.log(\"Saldo Insuficiente\");\n\n        global.set('cardUID', null);\n        global.set('saldo', null);\n        global.set('botao', null);\n\n        return null;\n    }\n\n        msg.topic = query3;\n\n        global.set('cardUID', null);\n        global.set('saldo', null);\n\n        console.log(\"Compra realizada! Botão 3\");\n\n        return msg;\n\n} else if (botao === \"E\") {\n    if (valorASubtrair4 > saldo) {\n        console.log(\"Saldo Insuficiente\");\n\n        global.set('cardUID', null);\n        global.set('saldo', null);\n        global.set('botao', null);\n\n        return null;\n    }\n\n    msg.topic = query4;\n\n    global.set('cardUID', null);\n    global.set('saldo', null);\n\n    console.log(\"Compra realizada! Botão 4\");\n\n    return msg;\n\n}else{\n    return null;\n}\n\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 780,
+        "y": 320,
+        "wires": [
+            [
+                "aa28c95ba3a75fec"
+            ]
+        ]
+    },
+    {
+        "id": "aa28c95ba3a75fec",
+        "type": "mysql",
+        "z": "71ec1bcf124a1298",
+        "mydb": "5854b7c08d8a89e0",
+        "name": "",
+        "x": 910,
+        "y": 380,
+        "wires": [
+            [
+                "a398ca2866cc88c0"
+            ]
+        ]
+    },
+    {
+        "id": "a398ca2866cc88c0",
+        "type": "function",
+        "z": "71ec1bcf124a1298",
+        "name": "Enviar serial arduino",
+        "func": "var botao = global.get('botao');\n\nvar mensagem1, mensagem2;\n\nif (botao === 'B') {\n    mensagem1 = { payload: \"compra1\" };\n    mensagem2 = { payload: \"finalizar\" };\n    global.set('botao', null);\n\n} else if (botao === 'C') {\n    mensagem1 = { payload: \"compra2\" };\n    mensagem2 = { payload: \"finalizar\" };\n    global.set('botao', null);\n} else if (botao === 'D') {\n    mensagem1 = { payload: \"compra3\" };\n    mensagem2 = { payload: \"finalizar\" };\n    global.set('botao', null);\n} else if (botao === 'E') {\n    mensagem1 = { payload: \"compra4\" };\n    mensagem2 = { payload: \"finalizar\" };\n    global.set('botao', null);\n}\n\n// Envie a primeira mensagem\nnode.send(mensagem1);\n\n// Adicione um atraso de 5 segundos antes de enviar a segunda mensagem\nsetTimeout(function () {\n    // Envie a segunda mensagem após o atraso\n    node.send(mensagem2);\n    // Encerra o código\n    return;\n}, 5000); // Atraso de 5 segundos\n",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1160,
+        "y": 320,
+        "wires": [
+            [
+                "8275aa689d3c13a4"
+            ]
+        ]
+    },
+    {
+        "id": "5854b7c08d8a89e0",
+        "type": "MySQLdatabase",
+        "name": "pap-maquina-de-vendas",
+        "host": "127.0.0.1",
+        "port": "3306",
+        "db": "pap-maquina-de-vendas",
+        "tz": "",
+        "charset": "UTF8"
+    },
+    {
+        "id": "07b4baa3fb802ecc",
         "type": "serial-port",
         "name": "",
-        "serialport": "COM5",
+        "serialport": "/dev/tty.usbmodem1201",
         "serialbaud": "9600",
         "databits": "8",
         "parity": "none",
@@ -124,13 +172,23 @@
         "responsetimeout": "10000"
     },
     {
-        "id": "f4063cddb9175b65",
-        "type": "MySQLdatabase",
-        "name": "pap-maquina-de-vendas",
-        "host": "localhost",
-        "port": "3306",
-        "db": "pap-maquina-de-vendas",
-        "tz": "",
-        "charset": "UTF8"
+        "id": "23ba4eeac67fb88a",
+        "type": "serial-port",
+        "name": "",
+        "serialport": "/dev/tty.usbmodem1201",
+        "serialbaud": "9600",
+        "databits": "8",
+        "parity": "none",
+        "stopbits": "1",
+        "waitfor": "",
+        "dtr": "none",
+        "rts": "none",
+        "cts": "none",
+        "dsr": "none",
+        "newline": "\\n",
+        "bin": "false",
+        "out": "char",
+        "addchar": "",
+        "responsetimeout": "10000"
     }
 ]
