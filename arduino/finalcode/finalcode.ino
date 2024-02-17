@@ -47,6 +47,8 @@ void loop() {
     if (input.equals("compra1")) {
       moveServo(servo1, 180);
     } else if (input.equals("compra2")) {
+      moveServo(servo2, 180);
+    } else if (input.equals("compra3")) {
       moveServo(servo3, 180);
     } else if (input.equals("compra4")) {
       moveServo(servo4, 180);
