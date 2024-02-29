@@ -18,7 +18,7 @@ if (!isset($_SESSION['valid'])) {
 </head>
 <body>
     <header>
-        <h1><a href="index.html">Máquina de Vendas</a></h1>
+        <h1><a href="index.php">Máquina de Vendas</a></h1>
         <nav>
             <a href="homepage.php">Voltar Atrás</a>
         </nav>
@@ -68,6 +68,8 @@ if (!isset($_SESSION['valid'])) {
         // Adicione a validação para aceitar números decimais no lado do cliente (JavaScript)
         document.getElementById('Saldo').addEventListener('input', function () {
             this.value = this.value.replace(/[^0-9.]/g, ''); // Remove caracteres não numéricos, exceto ponto
+            if (parseFloat(this.value) > 9999) {
+        this.value = "9999";}
         });
     </script>
 </body>

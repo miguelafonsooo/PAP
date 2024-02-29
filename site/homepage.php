@@ -3,7 +3,7 @@
 
     include("php/config.php");
     if(!isset($_SESSION['valid'])){
-        header("Location: index.html");
+        header("Location: index.php");
     
 
     }
@@ -36,7 +36,7 @@ while($result = mysqli_fetch_assoc($query)){
 
 ?>
     <header>
-        <h1><a href="index.html">Máquina de Vendas</a></h1>
+        <h1><a href="index.php">Máquina de Vendas</a></h1>
         <nav>
             <?php echo "<a href='edit.php'?Id='$res_id' class='links'>Editar Perfil</a>"; ?>
             <a href="php/logout.php">Sair da Conta</a>

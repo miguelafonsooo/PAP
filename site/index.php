@@ -14,13 +14,23 @@
     <!-- Cabeçalho -->
     <header>
         <!-- Título e link para a página inicial -->
-        <h1><a href="index.html">Máquina de Vendas</a></h1>
+        <h1><a href="index.php">Máquina de Vendas</a></h1>
         <!-- Navegação -->
         <nav>
-            <!-- Links para Login, Registro e Sobre Nós -->
-            <a href="login.php">Login</a>
-            <a href="registro.php">Criar Conta</a>
-            <a href="sobrenos.html">Sobre Nós</a>
+            <!-- Verifica se o usuário está logado -->
+            <?php
+                session_start();
+                if(isset($_SESSION['valid'])) {
+                    // Se estiver logado, exibe o link para a homepage
+                    echo '<a href="homepage.php">Homepage</a>';
+                } else {
+                    // Se não estiver logado, exibe os links para Login e Registro
+                    echo '<a href="login.php">Login</a>';
+                    echo '<a href="registro.php">Criar Conta</a>';
+                }
+            ?>
+            <!-- Link para Sobre Nós -->
+            <a href="sobrenos.php">Sobre Nós</a>
         </nav>
     </header>
     <!-- Conteúdo principal -->
@@ -53,7 +63,7 @@
                 <br> ou <br>
                     <a href="login.php">Fazer Login</a>
                 <br> ou <br>
-                    <a href="sobrenos.html">Sobre Nós</a>
+                    <a href="sobrenos.php">Sobre Nós</a>
             </p>
         </div>
     </main>

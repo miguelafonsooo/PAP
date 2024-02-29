@@ -67,8 +67,8 @@
                 <div class="header">Editar Perfil</div>
                 <form action="" method="post">
                     <div class="field input">
-                        <label for="username">Nome</label>
-                        <input type="text" name="username" id="username" value="<?php echo $res_Uname; ?>" autocomplete="off">
+                        <label for="username">Nome (máximo 10 caracteres)</label>
+                        <input type="text" name="username" id="username" value="<?php echo $res_Uname; ?>" autocomplete="off" maxlength="10">
                     </div>
                     <div class="field input">
                         <label for="email">Email</label>

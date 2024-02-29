@@ -25,11 +25,11 @@ if (isset($_SESSION['valid'])) {
 <body>
     <header>
         <!-- Cabeçalho da página com o título do site e links de navegação -->
-        <h1><a href="index.html">Máquina de Vendas</a></h1>
+        <h1><a href="index.php">Máquina de Vendas</a></h1>
         <nav>
             <a href="login.php">Login</a>
             <a href="registro.php">Criar Conta</a>
-            <a href="sobrenos.html">Sobre Nós</a>
+            <a href="sobrenos.php">Sobre Nós</a>
         </nav>
     </header>
     <main>
