@@ -37,7 +37,7 @@
             // Encerrar o script
             exit();
         } else {
-            // Exibir mensagem de erro se as credenciais estiverem incorretas
+
             $error_message = "Email ou senha incorretos";
         }
 
@@ -67,14 +67,7 @@
         <div class="caixa">
             <div class="box form-box">
                 <div class="header">Login</div>
-                <?php 
-                    // Exibir mensagem de erro se houver
-                    if(isset($error_message)){
-                        echo "<div class='message'>
-                              <p>{$error_message}</p>
-                              </div>";
-                    }
-                ?>
+               
                 <!-- Formulário de login -->
                 <form action="" method="post">
                     <!-- Campo de Email -->
@@ -90,12 +83,22 @@
                     <!-- Botão de Envio do Formulário -->
                     <div class="field">
                         <input type="submit" class="btn" name="submit" value="Login">
-                    </div>
+                    </div> 
                 </form>
+                <?php 
+                    // Exibir mensagem de erro se houver
+                    if(isset($error_message)){
+                        echo "<div class='message'><br>
+                              <p>{$error_message}</p>
+                              </div><br>";  
+                    }
+                ?>
                 <!-- Links adicionais -->
                 <div class="links">
                     Não tens conta? <a href="registro.php">Clica aqui</a>
                 </div>
+                
+                
             </div> 
         </div>
     </main>
