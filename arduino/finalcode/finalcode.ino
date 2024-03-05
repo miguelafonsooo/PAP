@@ -48,7 +48,7 @@ void loop() {
       cardUID += String(mfrc522.uid.uidByte[i], HEX);
     }
     Serial.println(cardUID); // Imprime o UID do cartão RFID
-    delay(1000); // Aguarda um segundo
+    delay(500); // Aguarda um segundo
   }
 
   // Verificar comandos enviados pela porta serial
@@ -57,13 +57,13 @@ void loop() {
     Serial.println(input);
     // Controla os servos de acordo com o comando recebido
     if (input.equals("compra1")) {
-      moveServo(servo1, 180);
+      moveServo(servo1, 10); // Move o servo 1 para o ângulo 10 (sentido anti-horário)
     } else if (input.equals("compra2")) {
-      moveServo(servo2, 180);
+      moveServo(servo2, 10); // Move o servo 2 para o ângulo 10 (sentido anti-horário)
     } else if (input.equals("compra3")) {
-      moveServo(servo3, 180);
+      moveServo(servo3, 10); // Move o servo 3 para o ângulo 10 (sentido anti-horário)
     } else if (input.equals("compra4")) {
-      moveServo(servo4, 180);
+      moveServo(servo4, 10); // Move o servo 4 para o ângulo 10 (sentido anti-horário)
     } else if (input.equals("finalizar")) {
       stopServos();
     } else if (input.startsWith("g")) {
@@ -75,23 +75,24 @@ void loop() {
   // Verificar botões físicos e enviar comandos pela porta serial
   if (digitalRead(BUTTON_PIN_1) == LOW) {
     Serial.println("B"); // Envia o comando "B" pela porta serial
-    delay(1000); // Aguarda um segundo
+    delay(500); // Aguarda um segundo
   } else if (digitalRead(BUTTON_PIN_2) == LOW) {
     Serial.println("C"); // Envia o comando "C" pela porta serial
-    delay(1000); // Aguarda um segundo
+    delay(500); // Aguarda um segundo
   } else if (digitalRead(BUTTON_PIN_3) == LOW) {
     Serial.println("D"); // Envia o comando "D" pela porta serial
-    delay(1000); // Aguarda um segundo
+    delay(500); // Aguarda um segundo
   } else if (digitalRead(BUTTON_PIN_4) == LOW) {
     Serial.println("E"); // Envia o comando "E" pela porta serial
-    delay(1000); // Aguarda um segundo
+    delay(500); // Aguarda um segundo
   }
 }
 
-// Função para mover um servo para um ângulo específico
+// Função para mover um servo para um ângulo específico (sentido anti-horário)
 void moveServo(Servo servo, int angle) {
-  servo.write(angle); // Move o servo para o ângulo especificado
-  delay(1000); // Aguarda um segundo
+  int pulseWidth = map(angle, 0, 180, 1000, 2000); // Mapeia o ângulo para a faixa de pulsos em microssegundos
+  servo.writeMicroseconds(pulseWidth); // Move o servo para a posição especificada
+   // Aguarda um segundo
 }
 
 // Função para parar todos os servos
