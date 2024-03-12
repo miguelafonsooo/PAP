@@ -6,7 +6,7 @@
 
 // Definições dos pinos
 #define SS_PIN 53         // Pino para SDA (SS) no Arduino Mega
-#define RST_PIN 8
+#define RST_PIN 2
 #define BUTTON_PIN_1 22   // Pino do botão 1
 #define BUTTON_PIN_2 23   // Pino do botão 2
 #define BUTTON_PIN_3 24   // Pino do botão 3
@@ -37,7 +37,7 @@ void setup() {
   lcd.setCursor(0, 0);
   lcd.clear();
   Serial.begin(9600);
-  lcd.print("Passe o cartao."); // Mensagem inicial no LCD
+  lcd.print("Passe o cartao"); // Mensagem inicial no LCD
 }
 
 void loop() {

@@ -7,48 +7,55 @@
         "info": ""
     },
     {
+        "id": "8275aa689d3c13a4",
+        "type": "serial out",
+        "z": "71ec1bcf124a1298",
+        "name": "",
+        "serial": "23ba4eeac67fb88a",
+        "x": 1250,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "a398ca2866cc88c0",
+        "type": "function",
+        "z": "71ec1bcf124a1298",
+        "name": "Enviar serial arduino",
+        "func": "var botao = global.get('botao');\nvar mensagem1, mensagem2;\n\nif (botao === 'B') {\n    mensagem1 = { payload: \"compra1\" };\n    mensagem2 = { payload: \"finalizar\" };\n    global.set('botao', null);\n} else if (botao === 'C') {\n    mensagem1 = { payload: \"compra2\" };\n    mensagem2 = { payload: \"finalizar\" };\n    global.set('botao', null);\n} else if (botao === 'D') {\n    mensagem1 = { payload: \"compra3\" };\n    mensagem2 = { payload: \"finalizar\" };\n    global.set('botao', null);\n} else if (botao === 'E') {\n    mensagem1 = { payload: \"compra4\" };\n    mensagem2 = { payload: \"finalizar\" };\n    global.set('botao', null);\n    \n}\n\nsetTimeout(function () {\n    node.send(mensagem1);\n    console.log(mensagem1);\n}, 3000);\n\nsetTimeout(function () {\n    node.send(mensagem2);\n    console.log(mensagem2);\n}, 4050);\n\nsetTimeout(function () {\n      var mensagem3 = {\n         payload: \"gPasse o cartao\"\n      };\n      node.send(mensagem3);\n   }, 6050);\n\n",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1220,
+        "y": 380,
+        "wires": [
+            [
+                "8275aa689d3c13a4"
+            ]
+        ]
+    },
+    {
         "id": "63ae3394780d516b",
         "type": "function",
         "z": "71ec1bcf124a1298",
         "name": "Function 1",
-        "func": "var cardUID = global.get('cardUID');\nvar saldo = msg.payload[0] ? msg.payload[0].Saldo : 'N/A';\nvar botao = global.get('botao');\nvar username = msg.payload[0] ? msg.payload[0].Username : 'N/A';\nvar userdecod = decodeURIComponent(escape(username));\nvar mensagem1;\nconsole.log(botao)\nconsole.log(cardUID)\n\nif ((botao === 'B' || botao === 'C' || botao === 'D' || botao === 'E') && (cardUID === null || cardUID === undefined || cardUID.length !== 8)) {\n   console.log(\"Por favor, passe o cartão primeiro.\");\n   var mensagem2 = {\n      payload: \"gPasse o cartao primeiro!\"\n   };\n   node.send([null, mensagem2]);\n\n   global.set('cardUID', null);\n   global.set('saldo', null);\n   global.set('botao', null);\n\n   return null;\n} else if (botao === 'B' || botao === 'C' || botao === 'D' || botao === 'E') {\n   return msg;\n}\n\nif (cardUID.length === 8 && saldo === 'N/A') {\n   console.log(\"O cartão \" + cardUID + \" não está registrado.\");\n   \n   var mensagem2 = {\n      payload: \"gCartao \" + cardUID + \" nao registado.\"\n   };\n   node.send([null, mensagem2]);\n      \n   setTimeout(function () {\n      var mensagem3 = {\n         payload: \"gPasse o cartao.\"\n      };\n      node.send([null, mensagem3]);\n   }, 10000);\n\n   global.set('cardUID', null);\n   global.set('saldo', null);\n   global.set('botao', null);\n\n   return null;\n} else if (cardUID.length === 8 && botao !== 'B' && botao !== 'C' && botao !== 'D' && botao !== 'E') {\n   console.log(\"Olá \" + userdecod + \"! Tens \" + saldo + \"€ de saldo no cartão \" + cardUID + \". Clica no botão para comprar!\");\n   global.set('saldo', saldo);\n   var mensagem2 = {\n      payload: \"gOla \" + userdecod + \" tem   \" + saldo + \" de saldo.\"\n   };\n   node.send([null, mensagem2]);\n}\n\nreturn;\n",
+        "func": "var cardUID = global.get('cardUID');\nvar saldo = msg.payload[0] ? msg.payload[0].Saldo : 'N/A';\nvar botao = global.get('botao');\nvar username = msg.payload[0] ? msg.payload[0].Username : 'N/A';\nvar userdecod = decodeURIComponent(escape(username));\nvar mensagem1;\n\nconsole.log(cardUID);\nconsole.log(saldo)\n\nif ((botao === 'B') && (cardUID === null || cardUID === undefined || cardUID.length !== 8)) {\n   var mensagem2 = {\n      payload: \"gPastilha Mint   1 euro\"\n   };\n   node.send([null, mensagem2]);\n\n   global.set('cardUID', null);\n   global.set('saldo', null);\n   global.set('botao', null);\n\n   setTimeout(function(){\n      var mensagem3 = {\n         payload: \"gPasse o cartao\"\n      };\n      node.send([null, mensagem3]);\n   }, 3000);\n   \n   return null;\n} else if ((botao === 'C') && (cardUID === null || cardUID === undefined || cardUID.length !== 8)) {\n   var mensagem2 = {\n      payload: \"gPastilha Morango1 euro\"\n   };\n   node.send([null, mensagem2]);\n\n   global.set('cardUID', null);\n   global.set('saldo', null);\n   global.set('botao', null);\n\n   setTimeout(function(){\n      var mensagem3 = {\n         payload: \"gPasse o cartao\"\n      };\n      node.send([null, mensagem3]);\n   }, 3000);\n   \n   return null;\n} else if ((botao === 'D') && (cardUID === null || cardUID === undefined || cardUID.length !== 8)) {\n   var mensagem2 = {\n      payload: \"gHalls Preto     1 euro\"\n   };\n   node.send([null, mensagem2]);\n\n   global.set('cardUID', null);\n   global.set('saldo', null);\n   global.set('botao', null);\n\n   setTimeout(function(){\n      var mensagem3 = {\n         payload: \"gPasse o cartao\"\n      };\n      node.send([null, mensagem3]);\n   }, 3000);\n   \n   return null;\n} else if ((botao === 'E') && (cardUID === null || cardUID === undefined || cardUID.length !== 8)) {\n   var mensagem2 = {\n      payload: \"gPastilha Menta  1 euro\"\n   };\n   node.send([null, mensagem2]);\n\n   global.set('cardUID', null);\n   global.set('saldo', null);\n   global.set('botao', null);\n\n   setTimeout(function(){\n      var mensagem3 = {\n         payload: \"gPasse o cartao\"\n      };\n      node.send([null, mensagem3]);\n   }, 3000);\n   \n   return null;\n} else if (botao === 'B' || botao === 'C' || botao === 'D' || botao === 'E') {\n   return msg;\n}\n\nif (cardUID.length === 8 && saldo === 'N/A') {\n   console.log(\"O cartão \" + cardUID + \" não está registrado\");\n\n   var mensagem2 = {\n      payload: \"gCartao \" + cardUID + \" nao registado\"\n   };\n   node.send([null, mensagem2]);\n\n   setTimeout(function () {\n      var mensagem3 = {\n         payload: \"gPasse o cartao.\"\n      };\n      node.send([null, mensagem3]);\n   }, 10000);\n\n   global.set('cardUID', null);\n   global.set('saldo', null);\n   global.set('botao', null);\n\n   return null;\n} else if (cardUID.length === 8 && botao !== 'B' && botao !== 'C' && botao !== 'D' && botao !== 'E') {\n   console.log(\"Olá \" + userdecod + \"! Tens \" + saldo + \"€ de saldo no cartão \" + cardUID + \". Clica no botão para comprar!\");\n   global.set('saldo', saldo);\n   var mensagem2 = {\n      payload: \"gOla \" + userdecod + \" tem   \" + saldo + \" euros\"\n   };\n   node.send([null, mensagem2]);\n}\n\nreturn;\n\n",
         "outputs": 2,
         "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 770,
+        "x": 730,
         "y": 260,
         "wires": [
             [
                 "dfc6b582e1457211"
             ],
             [
-                "4316b002eca3e289"
-            ]
-        ]
-    },
-    {
-        "id": "34e84b8977425bb8",
-        "type": "function",
-        "z": "71ec1bcf124a1298",
-        "name": "function 1",
-        "func": "// Extrair UID do payload\nvar cardUID = (msg.payload && typeof msg.payload === 'string') ? msg.payload.trim() : '';\n\n// Se o valor for 'B', trata-se do botão B\nif (cardUID === 'B' || cardUID === 'C' || cardUID === 'D' || cardUID === 'E') {\n    var botao = cardUID;\n    global.set('botao', botao);\n    return [null, msg]; // Saída para o botão\n} else {\n    // Se não for o botão, criar a consulta SQL e enviar para a base de dados\n    if (cardUID !== '' && cardUID.length === 8) {\n        // Limpar UID, removendo caracteres não hexadecimais\n        cardUID = cardUID.replace(/[^0-9a-fA-F]/g, '');\n        global.set('cardUID', cardUID);\n\n        // Criar a consulta SQL apenas se for um UID válido\n        msg.topic = \"SELECT Saldo, Username FROM users WHERE CardUID = '\" + cardUID + \"';\";\n        return [msg, null]; // Saída para a base de dados\n    } else {\n        return null; // Abortar se o UID do cartão estiver vazio\n    }\n}\n",
-        "outputs": 2,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "\n\n",
-        "finalize": "",
-        "libs": [],
-        "x": 300,
-        "y": 260,
-        "wires": [
-            [
-                "d11c3d2ff5103e77"
-            ],
-            [
-                "63ae3394780d516b"
+                "376f101c3c9070c5"
             ]
         ]
     },
@@ -76,40 +83,30 @@
         "y": 100,
         "wires": [
             [
-                "34e84b8977425bb8"
+                "f504e219d95a5e0b"
             ]
         ]
-    },
-    {
-        "id": "8275aa689d3c13a4",
-        "type": "serial out",
-        "z": "71ec1bcf124a1298",
-        "name": "",
-        "serial": "23ba4eeac67fb88a",
-        "x": 1230,
-        "y": 220,
-        "wires": []
     },
     {
         "id": "dfc6b582e1457211",
         "type": "function",
         "z": "71ec1bcf124a1298",
-        "name": "function 2",
-        "func": "var valorASubtrair1 = 10;\nvar valorASubtrair2 = 5;\nvar valorASubtrair3 = 50;\nvar valorASubtrair4 = 100;\n\nvar cardUID = global.get('cardUID');\nvar saldo = global.get('saldo');\nvar botao = global.get('botao');\n\nvar query1 = \"UPDATE users SET Saldo = Saldo - \" + valorASubtrair1 + \" WHERE CardUID = '\" + cardUID + \"'\";\nvar query2 = \"UPDATE users SET Saldo = Saldo - \" + valorASubtrair2 + \" WHERE CardUID = '\" + cardUID + \"'\";\nvar query3 = \"UPDATE users SET Saldo = Saldo - \" + valorASubtrair3 + \" WHERE CardUID = '\" + cardUID + \"'\";\nvar query4 = \"UPDATE users SET Saldo = Saldo - \" + valorASubtrair4 + \" WHERE CardUID = '\" + cardUID + \"'\";\n\nif (botao === \"B\") {\n    if (valorASubtrair1 > saldo) {\n        console.log(\"Saldo Insuficiente\");\n        var mensagem2 = {\n            payload: \"gSaldo Insuficiente\"\n        };\n        node.send([null, mensagem2]);\n\n        global.set('cardUID', null);\n        global.set('saldo', null);\n        global.set('botao', null);\n\n        return null;\n    }\n\n    msg.topic = query1;\n\n    global.set('cardUID', null);\n    global.set('saldo', null);\n\n    console.log(\"Compra realizada! Botão 1\");\n\n    var mensagem3 = {\n        payload: \"gCompra Realizada\"\n    };\n    node.send([null, mensagem3]);\n\n    return [msg, null];\n} else if (botao === \"C\") {\n    if (valorASubtrair2 > saldo) {\n        console.log(\"Saldo Insuficiente\");\n        var mensagem2 = {\n            payload: \"gSaldo Insuficiente\"\n        };\n        node.send([null, mensagem2]);\n\n        global.set('cardUID', null);\n        global.set('saldo', null);\n        global.set('botao', null);\n\n        return null;\n    }\n\n    msg.topic = query2;\n\n    global.set('cardUID', null);\n    global.set('saldo', null);\n\n    console.log(\"Compra realizada! Botão 2\");\n\n    var mensagem3 = {\n        payload: \"gCompra Realizada\"\n    };\n    node.send([null, mensagem3]);\n\n    return [msg, null];\n} else if (botao === \"D\") {\n    if (valorASubtrair3 > saldo) {\n        console.log(\"Saldo Insuficiente\");\n        var mensagem2 = {\n            payload: \"gSaldo Insuficiente\"\n        };\n        node.send([null, mensagem2]);\n\n        global.set('cardUID', null);\n        global.set('saldo', null);\n        global.set('botao', null);\n\n        return null;\n    }\n\n    msg.topic = query3;\n\n    global.set('cardUID', null);\n    global.set('saldo', null);\n\n    console.log(\"Compra realizada! Botão 3\");\n\n    var mensagem3 = {\n        payload: \"gCompra Realizada\"\n    };\n    node.send([null, mensagem3]);\n\n    return [msg, null];\n} else if (botao === \"E\") {\n    if (valorASubtrair4 > saldo) {\n        console.log(\"Saldo Insuficiente\");\n        var mensagem2 = {\n            payload: \"gSaldo Insuficiente\"\n        };\n        node.send([null, mensagem2]);\n\n        global.set('cardUID', null);\n        global.set('saldo', null);\n        global.set('botao', null);\n\n        return null;\n    }\n\n    msg.topic = query4;\n\n    global.set('cardUID', null);\n    global.set('saldo', null);\n\n    console.log(\"Compra realizada! Botão 4\");\n\n    var mensagem3 = {\n        payload: \"gCompra Realizada\"\n    };\n    node.send([null, mensagem3]);\n\n    return [msg, null];\n} else {\n    return null;\n}\n",
+        "name": "Verificar/cobrar os valores dos produtos",
+        "func": "var valorASubtrair1 = 1;\nvar valorASubtrair2 = 1;\nvar valorASubtrair3 = 1;\nvar valorASubtrair4 = 1;\n\nvar cardUID = global.get('cardUID');\nvar saldo = global.get('saldo');\nvar botao = global.get('botao');\n\nvar query1 = \"UPDATE users SET Saldo = Saldo - \" + valorASubtrair1 + \" WHERE CardUID = '\" + cardUID + \"'\";\nvar query2 = \"UPDATE users SET Saldo = Saldo - \" + valorASubtrair2 + \" WHERE CardUID = '\" + cardUID + \"'\";\nvar query3 = \"UPDATE users SET Saldo = Saldo - \" + valorASubtrair3 + \" WHERE CardUID = '\" + cardUID + \"'\";\nvar query4 = \"UPDATE users SET Saldo = Saldo - \" + valorASubtrair4 + \" WHERE CardUID = '\" + cardUID + \"'\";\n\nif (botao === \"B\") {\n    if (valorASubtrair1 > saldo) {\n        console.log(\"Saldo Insuficiente\");\n        var mensagem2 = {\n            payload: \"gSaldo Insuficiente\"\n        };\n        node.send([null, mensagem2]);\n\n        global.set('cardUID', null);\n        global.set('saldo', null);\n        global.set('botao', null);\n\n        return null;\n    }\n\n    msg.topic = query1;\n\n    global.set('cardUID', null);\n    global.set('saldo', null);\n\n    console.log(\"Compra realizada! Botão 1\");\n\n    var mensagem3 = {\n        payload: \"gCompra Realizada\"\n    };\n    node.send([null, mensagem3]);\n\n    return [msg, null];\n} else if (botao === \"C\") {\n    if (valorASubtrair2 > saldo) {\n        console.log(\"Saldo Insuficiente\");\n        var mensagem2 = {\n            payload: \"gSaldo Insuficiente\"\n        };\n        node.send([null, mensagem2]);\n\n        global.set('cardUID', null);\n        global.set('saldo', null);\n        global.set('botao', null);\n\n        return null;\n    }\n\n    msg.topic = query2;\n\n    global.set('cardUID', null);\n    global.set('saldo', null);\n\n    console.log(\"Compra realizada! Botão 2\");\n\n    var mensagem3 = {\n        payload: \"gCompra Realizada\"\n    };\n    node.send([null, mensagem3]);\n\n    return [msg, null];\n} else if (botao === \"D\") {\n    if (valorASubtrair3 > saldo) {\n        console.log(\"Saldo Insuficiente\");\n        var mensagem2 = {\n            payload: \"gSaldo Insuficiente\"\n        };\n        node.send([null, mensagem2]);\n\n        global.set('cardUID', null);\n        global.set('saldo', null);\n        global.set('botao', null);\n\n        return null;\n    }\n\n    msg.topic = query3;\n\n    global.set('cardUID', null);\n    global.set('saldo', null);\n\n    console.log(\"Compra realizada! Botão 3\");\n\n    var mensagem3 = {\n        payload: \"gCompra Realizada\"\n    };\n    node.send([null, mensagem3]);\n\n    return [msg, null];\n} else if (botao === \"E\") {\n    if (valorASubtrair4 > saldo) {\n        console.log(\"Saldo Insuficiente\");\n        var mensagem2 = {\n            payload: \"gSaldo Insuficiente\"\n        };\n        node.send([null, mensagem2]);\n\n        global.set('cardUID', null);\n        global.set('saldo', null);\n        global.set('botao', null);\n\n        return null;\n    }\n\n    msg.topic = query4;\n\n    global.set('cardUID', null);\n    global.set('saldo', null);\n\n    console.log(\"Compra realizada! Botão 4\");\n\n    var mensagem3 = {\n        payload: \"gCompra Realizada\"\n    };\n    node.send([null, mensagem3]);\n\n    return [msg, null];\n} else {\n    return null;\n}\n",
         "outputs": 2,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 780,
-        "y": 320,
+        "x": 820,
+        "y": 440,
         "wires": [
             [
                 "aa28c95ba3a75fec"
             ],
             [
-                "230b63878dd3a967"
+                "3c87417e9bc0afe5"
             ]
         ]
     },
@@ -119,8 +116,8 @@
         "z": "71ec1bcf124a1298",
         "mydb": "5854b7c08d8a89e0",
         "name": "",
-        "x": 910,
-        "y": 380,
+        "x": 1070,
+        "y": 520,
         "wires": [
             [
                 "a398ca2866cc88c0"
@@ -128,60 +125,53 @@
         ]
     },
     {
-        "id": "a398ca2866cc88c0",
+        "id": "f504e219d95a5e0b",
         "type": "function",
         "z": "71ec1bcf124a1298",
-        "name": "Enviar serial arduino",
-        "func": "var botao = global.get('botao');\nvar mensagem1, mensagem2;\n\nif (botao === 'B') {\n    mensagem1 = { payload: \"compra1\" };\n    mensagem2 = { payload: \"finalizar\" };\n    global.set('botao', null);\n} else if (botao === 'C') {\n    mensagem1 = { payload: \"compra2\" };\n    mensagem2 = { payload: \"finalizar\" };\n    global.set('botao', null);\n} else if (botao === 'D') {\n    mensagem1 = { payload: \"compra3\" };\n    mensagem2 = { payload: \"finalizar\" };\n    global.set('botao', null);\n} else if (botao === 'E') {\n    mensagem1 = { payload: \"compra4\" };\n    mensagem2 = { payload: \"finalizar\" };\n    global.set('botao', null);\n}\n\n// Envie a primeira mensagem\nsetTimeout(function () {\n    // Envie a segunda mensagem após o atraso\n    node.send(mensagem1);\n}, 3000);\n// Adicione um atraso de 5 segundos antes de enviar a segunda mensagem\nsetTimeout(function () {\n    // Envie a segunda mensagem após o atraso\n    node.send(mensagem2);\n}, 7000);\n\nsetTimeout(function () {\n      var mensagem3 = {\n         payload: \"gPasse o cartao.\"\n      };\n      node.send(mensagem3);\n   }, 10000);\n\n",
-        "outputs": 1,
-        "timeout": "",
+        "name": "function 1",
+        "func": "// Extrair UID do payload\nvar cardUID = (msg.payload && typeof msg.payload === 'string') ? msg.payload.trim() : '';\n\n// Se o valor for 'B', trata-se do botão B\nif (cardUID === 'B' || cardUID === 'C' || cardUID === 'D' || cardUID === 'E') {\n    var botao = cardUID;\n    global.set('botao', botao);\n    return [null, msg]; // Saída para o botão\n} else {\n    // Se não for o botão, criar a consulta SQL e enviar para a base de dados\n    if (cardUID !== '' && cardUID.length === 8) {\n        // Limpar UID, removendo caracteres não hexadecimais\n        cardUID = cardUID.replace(/[^0-9a-fA-F]/g, '');\n        global.set('cardUID', cardUID);\n\n        // Criar a consulta SQL apenas se for um UID válido\n        msg.topic = \"SELECT Saldo, Username FROM users WHERE CardUID = '\" + cardUID + \"';\";\n        return [msg, null]; // Saída para a base de dados\n    } else {\n        return null; // Abortar se o UID do cartão estiver vazio\n    }\n}\n",
+        "outputs": 2,
+        "timeout": 0,
         "noerr": 0,
-        "initialize": "",
+        "initialize": "\n\n",
         "finalize": "",
         "libs": [],
-        "x": 1160,
-        "y": 320,
+        "x": 300,
+        "y": 260,
         "wires": [
             [
-                "8275aa689d3c13a4"
+                "d11c3d2ff5103e77"
+            ],
+            [
+                "63ae3394780d516b"
             ]
         ]
     },
     {
-        "id": "4316b002eca3e289",
+        "id": "376f101c3c9070c5",
         "type": "serial out",
         "z": "71ec1bcf124a1298",
         "name": "",
         "serial": "23ba4eeac67fb88a",
-        "x": 1010,
-        "y": 100,
+        "x": 1070,
+        "y": 180,
         "wires": []
     },
     {
-        "id": "230b63878dd3a967",
+        "id": "3c87417e9bc0afe5",
         "type": "serial out",
         "z": "71ec1bcf124a1298",
         "name": "",
         "serial": "23ba4eeac67fb88a",
-        "x": 990,
-        "y": 440,
+        "x": 1150,
+        "y": 640,
         "wires": []
-    },
-    {
-        "id": "5854b7c08d8a89e0",
-        "type": "MySQLdatabase",
-        "name": "pap-maquina-de-vendas",
-        "host": "127.0.0.1",
-        "port": "3306",
-        "db": "pap-maquina-de-vendas",
-        "tz": "",
-        "charset": "UTF8"
     },
     {
         "id": "23ba4eeac67fb88a",
         "type": "serial-port",
         "name": "",
-        "serialport": "/dev/tty.usbmodem11101",
+        "serialport": "/dev/tty.usbmodem1201",
         "serialbaud": "9600",
         "databits": "8",
         "parity": "none",
@@ -196,5 +186,15 @@
         "out": "char",
         "addchar": "",
         "responsetimeout": "10000"
+    },
+    {
+        "id": "5854b7c08d8a89e0",
+        "type": "MySQLdatabase",
+        "name": "pap-maquina-de-vendas",
+        "host": "127.0.0.1",
+        "port": "3306",
+        "db": "pap-maquina-de-vendas",
+        "tz": "",
+        "charset": "UTF8"
     }
 ]
