@@ -50,7 +50,7 @@
             </p>
 
             <!-- Imagem ilustrativa -->
-            <img src="https://newebcdn-necta.evocagroup.com/sites/necta/files/styles/default/public/images/family/melodia_Hero.png?itok=ljHSsIzu" alt="">       
+            <img src="images/maquina-final.png" alt="">       
         </div>
     
         <!-- Caixa final com opções -->
