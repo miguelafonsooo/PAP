@@ -1,15 +1,6 @@
 <?php
-    // Iniciar a sessão
     session_start();
-    // Incluir o arquivo de configuração que contém as configurações do banco de dados
     include("php/config.php");
-
-    // Redirecionar se o usuário já estiver logado
-    if(isset($_SESSION['valid'])){
-        header("Location: homepage.php");
-        // Encerrar o script
-        exit();
-    }
 
     // Processamento do formulário de login quando enviado
     if(isset($_POST['submit'])){
@@ -32,12 +23,18 @@
             $_SESSION['username'] = $row['Username'];
             $_SESSION['age'] = $row['Age'];
             $_SESSION['id'] = $row['Id'];
-            // Redirecionar para a página inicial
-            header("Location: homepage.php");
+            
+            // Verificar se o usuário é um administrador
+            if ($row['UserRole'] === 'admin') {
+                // Redirecionar para a página de administração se for um administrador
+                header("Location: homeadmin.php");
+            } else {
+                // Redirecionar para a página inicial se não for um administrador
+                header("Location: homepage.php");
+            }
             // Encerrar o script
             exit();
         } else {
-
             $error_message = "Email ou senha incorretos";
         }
 

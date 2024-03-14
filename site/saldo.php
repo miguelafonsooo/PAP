@@ -20,7 +20,7 @@ if (!isset($_SESSION['valid'])) {
     <header>
         <h1><a href="index.php">Máquina de Vendas</a></h1>
         <nav>
-            <a href="homepage.php">Voltar Atrás</a>
+            <a href="homeadmin.php">Voltar Atrás</a>
         </nav>
     </header>
     <main>
@@ -38,7 +38,7 @@ if (!isset($_SESSION['valid'])) {
                         echo "<div class='message'>
                         <p>Saldo Atualizado!</p>
                     </div> <br>";
-                        echo "<a href='homepage.php' class='btn'>Voltar Atrás</a>";
+                        echo "<a href='homeadmin.php' class='btn'>Voltar Atrás</a>";
                     }
                 } else {
 

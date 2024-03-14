@@ -74,8 +74,8 @@ if (isset($_SESSION['valid'])) {
                     <div class="header">Registro</div>
                     <form action="" method="post">
                         <div class="field input">
-                            <label for="username">Nome Próprio</label>
-                            <input type="text" name="username" id="username" autocomplete="off" required>
+                            <label for="username">Nome (máximo de 10 caracteres)</label>
+                            <input type="text" name="username" id="username" autocomplete="off" maxlength="10" required>
                         </div>
                         <div class="field input">
                             <label for="email">Email</label>

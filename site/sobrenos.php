@@ -11,16 +11,16 @@
     <header>
         <h1><a href="index.php">Máquina de Vendas</a></h1>
         <nav>
-            <?php
-            session_start();
-            if(isset($_SESSION['valid'])) {
-                // Se estiver logado, exibe o link para a homepage
-                echo '<a href="homepage.php">Homepage</a>';
-            } else {
-                // Se não estiver logado, exibe os links para Login e Registro
-                echo '<a href="login.php">Login</a>';
-                echo '<a href="registro.php">Criar Conta</a>';
-            }
+        <?php
+                session_start();
+                if(isset($_SESSION['valid'])) {
+                    // Se estiver logado, exibe o link para a homepage
+                    echo '<a href="homeadmin.php">Homepage</a>';
+                } else {
+                    // Se não estiver logado, exibe os links para Login e Registro
+                    echo '<a href="login.php">Login</a>';
+                    echo '<a href="registro.php">Criar Conta</a>';
+                }
             ?>
         </nav>
     </header>

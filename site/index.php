@@ -22,7 +22,7 @@
                 session_start();
                 if(isset($_SESSION['valid'])) {
                     // Se estiver logado, exibe o link para a homepage
-                    echo '<a href="homepage.php">Homepage</a>';
+                    echo '<a href="homeadmin.php">Homepage</a>';
                 } else {
                     // Se não estiver logado, exibe os links para Login e Registro
                     echo '<a href="login.php">Login</a>';
