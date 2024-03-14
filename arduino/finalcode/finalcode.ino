@@ -103,6 +103,7 @@ void stopServos() {
   servo4.write(90); // Define a posição do servo 4 para 90 graus
 }
 
+// Função para exibir uma mensagem no LCD e limpar o LCD se a mensagem começar com 'g'
 // Função para exibir uma mensagem no LCD
 void displayMessage(String message) {
   lcd.clear(); // Limpa o LCD
