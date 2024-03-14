@@ -18,7 +18,7 @@
 </head>
 <body>
     <header>
-        <h1><a href="index.html">Máquina de Vendas</a></h1>
+        <h1><a href="index.php">Máquina de Vendas</a></h1>
         <nav>
             <a href="homeadmin.php">Voltar Atrás</a>
         </nav>

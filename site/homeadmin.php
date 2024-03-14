@@ -36,19 +36,21 @@ while($result = mysqli_fetch_assoc($query)){
 ?>
 <body>
     <header>
-        <h1><a href="index.php">Painel de Administração</a></h1>
+        <h1><a href="index.php">Máquina de Vendas</a></h1>
         <nav>
             <a href="edit.php">Editar Perfil</a>
-            <a href="php/logout.php">Sair</a>
+            <a href="php/logout.php">Sair da Conta</a>
         </nav>
     </header>
     <div class="homepage">
         <main>
             <h1>Administração</h1>
             <p><b>Bem Vindo <?php echo $res_Uname?>!</b></p>
-            <a href="produtos.php" class="links">Alterar Produtos Aqui</a>
+            <a href="produtos.php" class="links">Altera os Produtos Aqui</a>
 
             <a href="saldo.php" class="links">Alterar Saldo</a>
+
+            <a href="registrocartao.php" class="links">Alterar Cartão</a>
         </main>
     </div>
 </body>

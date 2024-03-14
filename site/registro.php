@@ -61,7 +61,7 @@ if (isset($_SESSION['valid'])) {
                         echo "<a href='javascript:self.history.back()' class='btn'>Voltar Atrás</a>";
                     } else {
                         // Insere os dados do usuário no banco de dados se o email estiver disponível
-                        mysqli_query($con, "INSERT INTO users (Username, Email, Age, Password, CardUID) VALUES ('$username', '$email', '$age', '$password_cripto', '$cardUID')") or die("Error Ocurred");
+                        mysqli_query($con, "INSERT INTO users (Username, Email, Age, Password) VALUES ('$username', '$email', '$age', '$password_cripto')") or die("Error Ocurred");
                         echo "<div class='message'>
                                 <p>Registro Completo!</p>
                             </div> <br>";
@@ -88,10 +88,6 @@ if (isset($_SESSION['valid'])) {
                         <div class="field input">
                             <label for="password">Palavra-Passe</label>
                             <input type="password" name="password" id="password" autocomplete="off" required>
-                        </div>
-                        <div class="field input">
-                            <label for="cardUID">UID do Cartão RFID (administrador necessário)</label>
-                            <input type="text" name="cardUID" id="cardUID" autocomplete="off" required>
                         </div>
                         <div class="field">
                             <!-- Botão de envio do formulário -->

@@ -58,7 +58,7 @@ while($result = mysqli_fetch_assoc($query)){
 
         <?php echo "<a href='saldo.php'?Id='$res_id' class='links'>Colocar Saldo</a>"; ?>
         
-        <h2>Queres alterar o cartão? Pede ajuda a um administrador e clica aqui!</h2>
+        <h2>Queres alterar o cartão? Passa o cartão na máquina de vendas e copia o código de 8 letras exibido no LCD</h2>
 
         <?php echo"<a href='registrocartao.php'?Id='$res_id' class='links'> Alterar Cartão</a>" ?>
     </main>

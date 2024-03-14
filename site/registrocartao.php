@@ -20,7 +20,7 @@
     <header>
         <h1><a href="index.php">Máquina de Vendas</a></h1>
         <nav>
-            <a href="homepage.php">Voltar Atrás</a>
+            <a href="homeadmin.php">Voltar Atrás</a>
         </nav>
     </header>
     <main>
@@ -40,7 +40,7 @@
                         echo "<div class='message'>
                         <p>Cartão Atualizado!</p>
                     </div> <br>";
-                    echo "<a href='homepage.php' class='btn'>Voltar Atrás</a>";
+                    echo "<a href='homeadmin.php' class='btn'>Voltar Atrás</a>";
                     }
                 }else{
 
