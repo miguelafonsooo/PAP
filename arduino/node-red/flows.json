@@ -7,16 +7,6 @@
         "info": ""
     },
     {
-        "id": "e449c6298de80173",
-        "type": "serial out",
-        "z": "01ddee14864b2a22",
-        "name": "",
-        "serial": "422ac26c16dfe984",
-        "x": 1430,
-        "y": 340,
-        "wires": []
-    },
-    {
         "id": "8f62c6eecbba6634",
         "type": "function",
         "z": "01ddee14864b2a22",
@@ -41,7 +31,7 @@
         "type": "function",
         "z": "01ddee14864b2a22",
         "name": "Function 1",
-        "func": "var cardUID = global.get('cardUID');\nvar saldo = msg.payload[0] ? msg.payload[0].Saldo : 'N/A';\nvar botao = global.get('botao');\nvar username = msg.payload[0] ? msg.payload[0].Username : 'N/A';\nvar userdecod = decodeURIComponent(escape(username));\nvar mensagem1;\nvar nome1 = \"g\" + global.get(\"nome1\");\nvar nome2 = \"g\" + global.get(\"nome2\");\nvar nome3 = \"g\" + global.get(\"nome3\");\nvar nome4 = \"g\" + global.get(\"nome4\");\nvar saldo1 = global.get(\"saldo1\");\nvar saldo2 = global.get(\"saldo2\");\nvar saldo3 = global.get(\"saldo3\");\nvar saldo4 = global.get(\"saldo4\");\n\nconsole.log(nome1)\nconsole.log(cardUID);\nconsole.log(saldo)\n\nif ((botao === 'B') && (cardUID === null || cardUID === undefined || cardUID.length !== 8)) {\n   var mensagem2 = {\n      payload: nome1 + \" \" + saldo1 + \" euro\"\n   };\n   node.send([null, mensagem2]);\n\n   global.set('cardUID', null);\n   global.set('saldo', null);\n   global.set('botao', null);\n\n   setTimeout(function(){\n      var mensagem3 = {\n         payload: \"gPasse o cartao\"\n      };\n      node.send([null, mensagem3]);\n   }, 3000);\n   \n   return null;\n} else if ((botao === 'C') && (cardUID === null || cardUID === undefined || cardUID.length !== 8)) {\n   var mensagem4 = {\n      payload: nome2 + \" \" + saldo2 + \" euro\"\n   };\n   node.send([null, mensagem4]);\n\n   global.set('cardUID', null);\n   global.set('saldo', null);\n   global.set('botao', null);\n\n   setTimeout(function(){\n      var mensagem3 = {\n         payload: \"gPasse o cartao\"\n      };\n      node.send([null, mensagem3]);\n   }, 3000);\n   \n   return null;\n} else if ((botao === 'D') && (cardUID === null || cardUID === undefined || cardUID.length !== 8)) {\n   var mensagem5 = {\n      payload: nome3 + \" \" + saldo3 + \" euro\"\n   };\n   node.send([null, mensagem5]);\n\n   global.set('cardUID', null);\n   global.set('saldo', null);\n   global.set('botao', null);\n\n   setTimeout(function(){\n      var mensagem3 = {\n         payload: \"gPasse o cartao\"\n      };\n      node.send([null, mensagem3]);\n   }, 3000);\n   \n   return null;\n} else if ((botao === 'E') && (cardUID === null || cardUID === undefined || cardUID.length !== 8)) {\n   var mensagem6 = {\n      payload: nome4 + \" \" + saldo4 + \" euro\"\n   };\n   node.send([null, mensagem6]);\n\n   global.set('cardUID', null);\n   global.set('saldo', null);\n   global.set('botao', null);\n\n   setTimeout(function(){\n      var mensagem3 = {\n         payload: \"gPasse o cartao\"\n      };\n      node.send([null, mensagem3]);\n   }, 3000);\n   \n   return null;\n} else if (botao === 'B' || botao === 'C' || botao === 'D' || botao === 'E') {\n   return ([msg, null]) ;\n}\n\nif (cardUID.length === 8 && saldo === 'N/A') {\n   console.log(\"O cartão \" + cardUID + \" não está registrado\");\n\n   var msg3 = {\n      payload: \"gCartao \" + cardUID + \" nao registado\"\n   };\n   node.send([null, msg3]);\n\n   setTimeout(function () {\n      var mensagem3 = {\n         payload: \"gPasse o cartao.\"\n      };\n      node.send([null, mensagem3]);\n   }, 10000);\n\n   global.set('cardUID', null);\n   global.set('saldo', null);\n   global.set('botao', null);\n\n   return null;\n} else if (cardUID.length === 8 && botao !== 'B' && botao !== 'C' && botao !== 'D' && botao !== 'E') {\n   global.set('saldo', saldo);\n   var msg3 = {\n      payload: \"gOla \" + userdecod + \" tem   \" + saldo + \" euros\"\n   };\n   node.send([null, msg3]);\n}\n\nreturn;\n\n",
+        "func": "var cardUID = global.get('cardUID');\nvar saldo = msg.payload[0] ? msg.payload[0].Saldo : 'N/A';\nvar botao = global.get('botao');\nvar username = msg.payload[0] ? msg.payload[0].Username : 'N/A';\nvar userdecod = decodeURIComponent(escape(username));\nvar mensagem1;\nvar nome1 = \"g\" + global.get(\"nome1\");\nvar nome2 = \"g\" + global.get(\"nome2\");\nvar nome3 = \"g\" + global.get(\"nome3\");\nvar nome4 = \"g\" + global.get(\"nome4\");\nvar saldo1 = global.get(\"saldo1\");\nvar saldo2 = global.get(\"saldo2\");\nvar saldo3 = global.get(\"saldo3\");\nvar saldo4 = global.get(\"saldo4\");\n\nconsole.log(nome1)\nconsole.log(cardUID);\nconsole.log(saldo)\n\nif ((botao === 'B') && (cardUID === null || cardUID === undefined || cardUID.length !== 8)) {\n   var mensagem2 = {\n      payload: nome1 + \" \" + saldo1 + \" euro\"\n   };\n   node.send([null, mensagem2]);\n\n   global.set('cardUID', null);\n   global.set('saldo', null);\n   global.set('botao', null);\n\n   setTimeout(function(){\n      var mensagem3 = {\n         payload: \"gPasse o cartao\"\n      };\n      node.send([null, mensagem3]);\n   }, 3000);\n   \n   return null;\n} else if ((botao === 'C') && (cardUID === null || cardUID === undefined || cardUID.length !== 8)) {\n   var mensagem4 = {\n      payload: nome2 + \" \" + saldo2 + \" euro\"\n   };\n   node.send([null, mensagem4]);\n\n   global.set('cardUID', null);\n   global.set('saldo', null);\n   global.set('botao', null);\n\n   setTimeout(function(){\n      var mensagem3 = {\n         payload: \"gPasse o cartao\"\n      };\n      node.send([null, mensagem3]);\n   }, 3000);\n   \n   return null;\n} else if ((botao === 'D') && (cardUID === null || cardUID === undefined || cardUID.length !== 8)) {\n   var mensagem5 = {\n      payload: nome3 + \" \" + saldo3 + \" euro\"\n   };\n   node.send([null, mensagem5]);\n\n   global.set('cardUID', null);\n   global.set('saldo', null);\n   global.set('botao', null);\n\n   setTimeout(function(){\n      var mensagem3 = {\n         payload: \"gPasse o cartao\"\n      };\n      node.send([null, mensagem3]);\n   }, 3000);\n   \n   return null;\n} else if ((botao === 'E') && (cardUID === null || cardUID === undefined || cardUID.length !== 8)) {\n   var mensagem6 = {\n      payload: nome4 + \" \" + saldo4 + \" euro\"\n   };\n   node.send([null, mensagem6]);\n\n   global.set('cardUID', null);\n   global.set('saldo', null);\n   global.set('botao', null);\n\n   setTimeout(function(){\n      var mensagem3 = {\n         payload: \"gPasse o cartao\"\n      };\n      node.send([null, mensagem3]);\n   }, 3000);\n   \n   return null;\n} else if (botao === 'B' || botao === 'C' || botao === 'D' || botao === 'E') {\n   return ([msg, null]) ;\n}\n\nif (cardUID.length === 8 && saldo === 'N/A') {\n   console.log(\"O cartão \" + cardUID + \" não está registrado\");\n\n   var msg3 = {\n      payload: \"gCartao \" + cardUID + \" nao registado\"\n   };\n   node.send([null, msg3]);\n\n   global.set('cardUID', null);\n   global.set('saldo', null);\n   global.set('botao', null);\n\n   return null;\n} else if (cardUID.length === 8 && botao !== 'B' && botao !== 'C' && botao !== 'D' && botao !== 'E') {\n   global.set('saldo', saldo);\n   var msg3 = {\n      payload: \"gOla \" + userdecod + \" tem   \" + saldo + \" euros\"\n   };\n   node.send([null, msg3]);\n}\n\nreturn;\n\n",
         "outputs": 2,
         "timeout": "",
         "noerr": 0,
@@ -56,34 +46,6 @@
             ],
             [
                 "0ae6f9e76cb0f9d8"
-            ]
-        ]
-    },
-    {
-        "id": "aedc77964bf62a96",
-        "type": "mysql",
-        "z": "01ddee14864b2a22",
-        "mydb": "f7f66b4e9fb74ce3",
-        "name": "",
-        "x": 510,
-        "y": 200,
-        "wires": [
-            [
-                "09e46522a0496035"
-            ]
-        ]
-    },
-    {
-        "id": "0339f2cf5fd29e08",
-        "type": "serial in",
-        "z": "01ddee14864b2a22",
-        "name": "",
-        "serial": "422ac26c16dfe984",
-        "x": 150,
-        "y": 100,
-        "wires": [
-            [
-                "9dc992be3db5de1d"
             ]
         ]
     },
@@ -107,20 +69,6 @@
             ],
             [
                 "e33e4a29d448b59a"
-            ]
-        ]
-    },
-    {
-        "id": "220e838df67fbbe4",
-        "type": "mysql",
-        "z": "01ddee14864b2a22",
-        "mydb": "f7f66b4e9fb74ce3",
-        "name": "",
-        "x": 1150,
-        "y": 520,
-        "wires": [
-            [
-                "8f62c6eecbba6634"
             ]
         ]
     },
@@ -149,26 +97,6 @@
         ]
     },
     {
-        "id": "0ae6f9e76cb0f9d8",
-        "type": "serial out",
-        "z": "01ddee14864b2a22",
-        "name": "",
-        "serial": "422ac26c16dfe984",
-        "x": 770,
-        "y": 160,
-        "wires": []
-    },
-    {
-        "id": "e33e4a29d448b59a",
-        "type": "serial out",
-        "z": "01ddee14864b2a22",
-        "name": "",
-        "serial": "422ac26c16dfe984",
-        "x": 1130,
-        "y": 640,
-        "wires": []
-    },
-    {
         "id": "d29b5b69eb6e8135",
         "type": "function",
         "z": "01ddee14864b2a22",
@@ -185,20 +113,6 @@
         "wires": [
             [
                 "0ce5bc532ed99cce"
-            ]
-        ]
-    },
-    {
-        "id": "0ce5bc532ed99cce",
-        "type": "mysql",
-        "z": "01ddee14864b2a22",
-        "mydb": "f7f66b4e9fb74ce3",
-        "name": "Executar Consulta MySQL",
-        "x": 390,
-        "y": 640,
-        "wires": [
-            [
-                "a8a2c4e9089010fb"
             ]
         ]
     },
@@ -268,16 +182,6 @@
         "wires": []
     },
     {
-        "id": "f4c48f855d9cebb5",
-        "type": "serial out",
-        "z": "01ddee14864b2a22",
-        "name": "",
-        "serial": "422ac26c16dfe984",
-        "x": 890,
-        "y": 40,
-        "wires": []
-    },
-    {
         "id": "c5bbdc11d2035e01",
         "type": "function",
         "z": "01ddee14864b2a22",
@@ -323,10 +227,116 @@
         ]
     },
     {
+        "id": "aedc77964bf62a96",
+        "type": "mysql",
+        "z": "01ddee14864b2a22",
+        "mydb": "f7f66b4e9fb74ce3",
+        "name": "",
+        "x": 510,
+        "y": 200,
+        "wires": [
+            [
+                "09e46522a0496035"
+            ]
+        ]
+    },
+    {
+        "id": "220e838df67fbbe4",
+        "type": "mysql",
+        "z": "01ddee14864b2a22",
+        "mydb": "f7f66b4e9fb74ce3",
+        "name": "",
+        "x": 1150,
+        "y": 520,
+        "wires": [
+            [
+                "8f62c6eecbba6634"
+            ]
+        ]
+    },
+    {
+        "id": "0ce5bc532ed99cce",
+        "type": "mysql",
+        "z": "01ddee14864b2a22",
+        "mydb": "f7f66b4e9fb74ce3",
+        "name": "Executar Consulta MySQL",
+        "x": 390,
+        "y": 640,
+        "wires": [
+            [
+                "a8a2c4e9089010fb"
+            ]
+        ]
+    },
+    {
+        "id": "0339f2cf5fd29e08",
+        "type": "serial in",
+        "z": "01ddee14864b2a22",
+        "name": "",
+        "serial": "422ac26c16dfe984",
+        "x": 150,
+        "y": 100,
+        "wires": [
+            [
+                "9dc992be3db5de1d"
+            ]
+        ]
+    },
+    {
+        "id": "e449c6298de80173",
+        "type": "serial out",
+        "z": "01ddee14864b2a22",
+        "name": "",
+        "serial": "422ac26c16dfe984",
+        "x": 1430,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "0ae6f9e76cb0f9d8",
+        "type": "serial out",
+        "z": "01ddee14864b2a22",
+        "name": "",
+        "serial": "422ac26c16dfe984",
+        "x": 770,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "e33e4a29d448b59a",
+        "type": "serial out",
+        "z": "01ddee14864b2a22",
+        "name": "",
+        "serial": "422ac26c16dfe984",
+        "x": 1130,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "f4c48f855d9cebb5",
+        "type": "serial out",
+        "z": "01ddee14864b2a22",
+        "name": "",
+        "serial": "422ac26c16dfe984",
+        "x": 890,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "f7f66b4e9fb74ce3",
+        "type": "MySQLdatabase",
+        "name": "pap-maquina-de-vendas",
+        "host": "127.0.0.1",
+        "port": "3306",
+        "db": "pap-maquina-de-vendas",
+        "tz": "",
+        "charset": "UTF8"
+    },
+    {
         "id": "422ac26c16dfe984",
         "type": "serial-port",
         "name": "",
-        "serialport": "/dev/tty.usbmodem1201",
+        "serialport": "COM3",
         "serialbaud": "9600",
         "databits": "8",
         "parity": "none",
@@ -341,15 +351,5 @@
         "out": "char",
         "addchar": "",
         "responsetimeout": "10000"
-    },
-    {
-        "id": "f7f66b4e9fb74ce3",
-        "type": "MySQLdatabase",
-        "name": "pap-maquina-de-vendas",
-        "host": "127.0.0.1",
-        "port": "3306",
-        "db": "pap-maquina-de-vendas",
-        "tz": "",
-        "charset": "UTF8"
     }
 ]
